@@ -1,11 +1,16 @@
-# I want to put the interpretation code I write in a separate file, so I can call them when I need to in a main analysis file
+# I want to put the interpretation code I write in a separate file, 
+# so I can call them when I need to in a main analysis file
 
-import numpy as np
-import pandas as pd
 
 # A function that will interpret the string as a list:
 
 def intlist(s):
+    """ Recieves a list written in a string format
+        and transforms it into a list object-
+
+        Args:
+        s (str):  string version of a list.
+    """
     s = s.strip('[')
     s = s.strip(']')
     l = s.split(', ')
@@ -14,9 +19,13 @@ def intlist(s):
         interpreted.append(int(n))
     return interpreted
 
-# A function that will split the equations into terms. The terms are always separated by a + or -.
-
 def get_terms(equation):
+    """A function that will split the equations into terms. 
+       The terms are always separated by a + or -.
+
+       Args:
+       equation (str): equation written in a string form.
+    """
     equation = equation.replace('+','-')
     # Break the equation into it's terms
     term_list = equation.split('-')
@@ -27,9 +36,14 @@ def get_terms(equation):
     # This gets rid of the empty string that results from the equation starting with a negative sign.
     return terms
 
-# A function to get the signs
 
 def get_signs(equation):
+    """For a given equation in a string format will give 
+       a list with the sign of each term.
+
+       Args:
+       equation (str): equation written in a string form.
+    """
     sign_array = []
     if equation[0] != "-":
         sign_array.append(1)
@@ -42,9 +56,12 @@ def get_signs(equation):
             continue
     return sign_array
 
-# A function that finds all of the constants
 
 def find_constants(data):
+    """Find the constants in the equations in the data set.
+
+       data (DataFrame): dataframe containing all equations.
+    """
     cnst_list = []
     for equation in data:
         for term in get_terms(equation):
@@ -72,9 +89,16 @@ def find_constants(data):
     return cnst_list
                                                 
 
-# A function that splits a single term up into individual parts
-
 def process_term(term, cnst_list):
+    """ # A function that splits a single term up 
+        into individual parts
+
+        Args:
+        term (str): Individual term of the equation in
+                    string format
+        cnst_list (list): list with the constants of the
+                          set of original differential equations
+    """
     # First need to separate coefficients
     parts = term.split('*')
     # Make the numerical coefficient into an integer
@@ -106,15 +130,55 @@ def process_term(term, cnst_list):
     else:
         greek_list = [0 for cnst in cnst_list]
         pass
-    return [parts[0], greek_list, parts[-1]]
-
-# A more convinient form for analyzing the term lists
-process_terms = lambda terms: [process_term(term) for term in terms]
+    fnc, derivatives = process_derivative(parts[-1])
+    return [parts[0], greek_list, derivatives, fnc]
 
 # Function to process the derivatives.
 
 def process_derivative(derivative):
+    """ Takes the derivative and variable information from 
+        a string
+
+        Args:
+        derivative (str): A containing the information of which
+                          variable is being derivend and the order
+                          of the derivatives
+    """
     derivative = derivative.strip('Derivative')
     int_list = derivative[:derivative.find(']')+1]
     fnc = derivative[derivative.find(']')+1:].strip('[]')
     return fnc, intlist(int_list)
+
+def term_to_dict(term):
+    """ Takes the list with the information of the
+        each term and put it in a dictionary 
+
+        Args:
+        term (list): List containing the information of
+                     an individual term. 
+    """
+    term_dict = {"coefficient": term[0],
+                 "constants": term[1],
+                 "derivatives": term[2],
+                 "variable": term[3]}
+    return term_dict
+
+def eqn_process(equation, cnst_list):
+    """ Takes an equation and split it in a list of dictionaries
+        saving all the relevant information for each term
+
+        Args:
+        term (list): List containing the information of
+                     an individual term. 
+    """
+    signs = get_signs(equation)
+    terms = get_terms(equation)
+    signs_terms =  zip(signs, terms)
+    list_terms = []
+    for sign, term in signs_terms:
+        processed_term = process_term(term, cnst_list)
+        term_dict = term_to_dict(processed_term)
+        term_dict["coefficient"] = term_dict["coefficient"]*sign
+        list_terms.append(term_dict)
+    return list_terms
+        
