@@ -1,9 +1,6 @@
 # I want to put the interpretation code I write in a separate file, 
 # so I can call them when I need to in a main analysis file
 
-
-# A function that will interpret the string as a list:
-
 def intlist(s):
     """ Recieves a list written in a string format
         and transforms it into a list object-
@@ -157,6 +154,8 @@ def term_to_dict(term):
         term (list): List containing the information of
                      an individual term. 
     """
+    if type(term[0]) != int:
+        term[0] = 1
     term_dict = {"coefficient": term[0],
                  "constants": term[1],
                  "derivatives": term[2],
@@ -181,4 +180,37 @@ def eqn_process(equation, cnst_list):
         term_dict["coefficient"] = term_dict["coefficient"]*sign
         list_terms.append(term_dict)
     return list_terms
-        
+
+def is_zero(zero_term, term):
+    """Given a term that is zero, returns true if
+       term is zero as well.
+
+        Args:
+        zero_term (dict): a dictionary containing the
+                          information of the zero term
+        term (dict):      a dictionary containing the
+                          information of the term
+    """
+    # if term == 0:
+    #     return False
+    return zero_term['variable']==term['variable'] and\
+          compare_derivatives(zero_term['derivatives'], term['derivatives'])
+
+
+def compare_derivatives(D1,D2):
+    """Given to lists with the information of the derivatives
+       tells if the second term contains a derivative equal 
+       or higher order for all possible derivatives.
+
+        Args:
+        D1 (list): list of derivatives of term 1
+        D2 (list): list of derivatives of term 1
+    """
+    D1D2 =  zip(D1, D2)
+    for d1, d2 in D1D2:
+        if d1 > 0 and d2 >= d1:
+            return True
+    # I do not think this if is needed at all
+    if sum(D1)==0 and sum(D2)==0:
+        return True 
+    return False
