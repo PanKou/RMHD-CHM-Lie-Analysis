@@ -1,5 +1,6 @@
 # I want to put the interpretation code I write in a separate file, 
 # so I can call them when I need to in a main analysis file
+from sympy import *
 
 def intlist(s):
     """ Recieves a list written in a string format
@@ -214,3 +215,34 @@ def compare_derivatives(D1,D2):
     if sum(D1)==0 and sum(D2)==0:
         return True 
     return False
+
+def dict_to_symb(term, var_dict, var_list, alpha, eta):
+    """Given a dictionary it returns the symbolic
+       equivalent.
+
+        Args:
+        eqn (dict): dictionary with the information of
+                    the term.
+    """
+    var = var_dict[term['variable']]
+    list_devs = term['derivatives']
+    D = take_derivative(list_devs, var, var_list)
+    sym_term = term['coefficient']*alpha**term['constants'][0]*eta**term['constants'][1]*D
+    return sym_term
+
+def take_derivative(list_devs, var, var_list):
+    """Given a list of derivatives executes all the
+       derivatives on the variable.
+
+        Args:
+        list_devs (list): list of ints containing the 
+                          order of the derivative 
+                          with respect to the variable
+                          var_lists.
+        var (symbol):     variable to be differentiate
+        var_list (list):  list of independant and dependant
+                          variables.
+    """
+    for i in range(len(list_devs)):
+        var = var.diff(var_list[i],list_devs[i])
+    return var
