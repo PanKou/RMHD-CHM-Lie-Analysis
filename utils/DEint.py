@@ -216,9 +216,11 @@ def compare_derivatives(D1,D2):
         return True 
     return False
 
-def dict_to_symb(term, var_dict, var_list, alpha, eta):
+def dict_to_symb(term, var_dict, var_list, 
+                    sym_cte_list, one_term):
     """Given a dictionary it returns the symbolic
-       equivalent.
+       equivalent. It drops all constants if it is 
+       just one term.
 
         Args:
         eqn (dict): dictionary with the information of
@@ -226,8 +228,16 @@ def dict_to_symb(term, var_dict, var_list, alpha, eta):
     """
     var = var_dict[term['variable']]
     list_devs = term['derivatives']
+    cte_power = zip(sym_cte_list, term['constants'])
+    a = 1
+    if one_term:
+        coeff = 1
+    else:
+        for cte, n in cte_power:
+            a *= cte**n
+        coeff = term['coefficient']
     D = take_derivative(list_devs, var, var_list)
-    sym_term = term['coefficient']*alpha**term['constants'][0]*eta**term['constants'][1]*D
+    sym_term = coeff*a*D
     return sym_term
 
 def take_derivative(list_devs, var, var_list):

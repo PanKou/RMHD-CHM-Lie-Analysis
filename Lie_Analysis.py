@@ -22,9 +22,7 @@ eta_3 = Function('eta_3')(x, y, z, t, tau, phi, psi, chi)
 
 var_dict = {'xse1':xi_1, 'xse2':xi_2, 'xse3':xi_3, 'xse4':xi_4, 'xse5':xi_5, 
            'eta1':eta_1, 'eta2':eta_2, 'eta3':eta_3}
-var_list = [x, y, z, t, tau, phi, psi, chi]
-alpha, eta = symbols('alpha eta') 
-
+var_list = [x, y, z, t, tau, phi, psi, chi] 
 
 def cvs_to_list():
     """Converts a cvs containing all the determining equiation
@@ -37,6 +35,7 @@ def cvs_to_list():
     pd.set_option('display.max_colwidth', None)
     raw_eqs.columns = ['eqn']
     raw_eqs.eqn = raw_eqs.eqn.apply(lambda eq: eq.strip(' == 0'))
+    global constants
     constants = de.find_constants(raw_eqs.eqn)
     det_eqn = {}
     for i, row in raw_eqs.iterrows():
@@ -83,10 +82,16 @@ def get_symbolic_terms(eqn):
        Args:
        eqn (list): list of dictionaries 
     """
-    A = 0
+    sym_cte_list = []
+    for idx in range(len(constants)):
+        sym_cte_list.append(symbols('alpha_' + str(idx)))
+    A = 0 
     for term in eqn:
+        one_term = False
+        if len(eqn) == 1:
+            one_term = True
         A += de.dict_to_symb(term, var_dict, 
-                            var_list, alpha, eta)
+                            var_list, sym_cte_list, one_term)
     return A
 
 def sym_det_eqn(det_eqn):
@@ -100,7 +105,7 @@ def sym_det_eqn(det_eqn):
     M = Matrix([[]])
     i = 1
     for eqn in det_eqn.values():
-        M = M.row_insert(0, Matrix([[i,
+        M = M.row_insert(i-1, Matrix([[i,
             get_symbolic_terms(eqn)
         ]]))
         i += 1
