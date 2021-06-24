@@ -253,6 +253,10 @@ def take_derivative(list_devs, var, var_list):
         var_list (list):  list of independant and dependant
                           variables.
     """
-    for i in range(len(list_devs)):
-        var = var.diff(var_list[i],list_devs[i])
+    D_v = zip(list_devs, var_list)
+    var_str = var
+    for D, v in D_v:
+        for _ in range(D):
+            var_str = var_str + '_' + v
+    var = symbols(var_str)
     return var

@@ -7,22 +7,9 @@ from utils import DEint as de
 from sympy import *
 
 # Global variables
-x, y, z, t, tau = symbols('x y z t tau')
-phi, psi, chi = symbols('phi psi chi')
-
-xi_1 = Function('xi_1')(x, y, z, t, tau, phi, psi, chi)
-xi_2 = Function('xi_2')(x, y, z, t, tau, phi, psi, chi)
-xi_3 = Function('xi_3')(x, y, z, t, tau, phi, psi, chi)
-xi_4 = Function('xi_4')(x, y, z, t, tau, phi, psi, chi)
-xi_5 = Function('xi_5')(x, y, z, t, tau, phi, psi, chi)
-
-eta_1 = Function('eta_1')(x, y, z, t, tau, phi, psi, chi)
-eta_2 = Function('eta_2')(x, y, z, t, tau, phi, psi, chi)
-eta_3 = Function('eta_3')(x, y, z, t, tau, phi, psi, chi)
-
-var_dict = {'xse1':xi_1, 'xse2':xi_2, 'xse3':xi_3, 'xse4':xi_4, 'xse5':xi_5, 
-           'eta1':eta_1, 'eta2':eta_2, 'eta3':eta_3}
-var_list = [x, y, z, t, tau, phi, psi, chi] 
+var_dict = {'xse1':'xi^(1)', 'xse2':'xi^(2)', 'xse3':'xi^(3)', 'xse4':'xi^(4)',
+             'xse5':'xi^(5)', 'eta1':'eta^(1)', 'eta2':'eta^(2)', 'eta3':'eta^(3)'}
+var_list = ['x', 'y', 'z', 't', 'tau', 'phi', 'psi', 'chi'] 
 
 def cvs_to_list():
     """Converts a cvs containing all the determining equiation
@@ -90,8 +77,8 @@ def get_symbolic_terms(eqn):
         one_term = False
         if len(eqn) == 1:
             one_term = True
-        A += de.dict_to_symb(term, var_dict, 
-                            var_list, sym_cte_list, one_term)
+        A += de.dict_to_symb(term, var_dict, var_list,
+                     sym_cte_list, one_term)
     return A
 
 def sym_det_eqn(det_eqn):
@@ -106,7 +93,7 @@ def sym_det_eqn(det_eqn):
     i = 1
     for eqn in det_eqn.values():
         M = M.row_insert(i-1, Matrix([[i,
-            get_symbolic_terms(eqn)
+            Eq(get_symbolic_terms(eqn), 0)
         ]]))
         i += 1
     return M
