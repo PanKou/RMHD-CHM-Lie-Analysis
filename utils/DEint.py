@@ -4,7 +4,7 @@ from sympy import *
 
 def intlist(s):
     """ Recieves a list written in a string format
-        and transforms it into a list object-
+        and transforms it into a list object.
 
         Args:
         s (str):  string version of a list.
@@ -55,12 +55,16 @@ def get_signs(equation):
     return sign_array
 
 
-def find_constants(data):
+def find_constants(data, var_list):
     """Find the constants in the equations in the data set.
 
        data (DataFrame): dataframe containing all equations.
     """
-    cnst_list = []
+    var_csv_label_list = []
+    for k in range(1, len(var_list)):
+        var_csv_label_list.append('z' + str(k))
+    var_csv_label_list.append('z' + str(k+1))
+    cnst_list = var_csv_label_list
     for equation in data:
         for term in get_terms(equation):
             parts = term.split('*')
@@ -87,7 +91,7 @@ def find_constants(data):
     return cnst_list
                                                 
 
-def process_term(term, cnst_list):
+def process_term(term, cnst_list, var_list):
     """ # A function that splits a single term up 
         into individual parts
 
@@ -109,13 +113,18 @@ def process_term(term, cnst_list):
             parts = [1] + parts
 
     # Need to strip in 2 stages as to not delete the function information
-    parts[-1] = parts[-1].strip('z1, z2, z3, z4, z5, z6, z7, z8, z9])').strip('[')
+    var_str = ''
+    for k in range(1, len(var_list)):
+        var_str = var_str + 'z' + str(k) + ', '
+    var_str = var_str + 'z' + str(k + 1) + '])'
+    parts[-1] = parts[-1].strip(var_str).strip('[')
     greek_list = []
     if len(parts) > 2:
         # At this point we definitely have a greek letter: print(parts[1:-1])
         for cnst in cnst_list:
             i = 0
-            # In general we have something like 'η^2'. We need to add the power of each greek letter to the list.
+            # In general we have something like 'η^2'. 
+            # We need to add the power of each greek letter to the list.
             for letter in parts[1:-1]:
                 if cnst in letter:
                     if '^' in letter:
@@ -128,12 +137,12 @@ def process_term(term, cnst_list):
     else:
         greek_list = [0 for cnst in cnst_list]
         pass
-    fnc, derivatives = process_derivative(parts[-1])
+    fnc, derivatives = process_derivative(parts[-1], var_list)
     return [parts[0], greek_list, derivatives, fnc]
 
 # Function to process the derivatives.
 
-def process_derivative(derivative):
+def process_derivative(derivative, var_list):
     """ Takes the derivative and variable information from 
         a string
 
@@ -142,9 +151,13 @@ def process_derivative(derivative):
                           variable is being derivend and the order
                           of the derivatives
     """
-    derivative = derivative.strip('Derivative')
-    int_list = derivative[:derivative.find(']')+1]
-    fnc = derivative[derivative.find(']')+1:].strip('[]')
+    if 'Derivative' in derivative:
+        derivative = derivative.strip('Derivative')
+        int_list = derivative[:derivative.find(']')+1]
+        fnc = derivative[derivative.find(']')+1:].strip('[]')
+    else:
+        int_list = [0 for i in var_list]
+        return derivative, int_list
     return fnc, intlist(int_list)
 
 def term_to_dict(term):
@@ -163,7 +176,7 @@ def term_to_dict(term):
                  "variable": term[3]}
     return term_dict
 
-def eqn_process(equation, cnst_list):
+def eqn_process(equation, cnst_list, var_list):
     """ Takes an equation and split it in a list of dictionaries
         saving all the relevant information for each term
 
@@ -176,7 +189,7 @@ def eqn_process(equation, cnst_list):
     signs_terms =  zip(signs, terms)
     list_terms = []
     for sign, term in signs_terms:
-        processed_term = process_term(term, cnst_list)
+        processed_term = process_term(term, cnst_list, var_list)
         term_dict = term_to_dict(processed_term)
         term_dict["coefficient"] = term_dict["coefficient"]*sign
         list_terms.append(term_dict)

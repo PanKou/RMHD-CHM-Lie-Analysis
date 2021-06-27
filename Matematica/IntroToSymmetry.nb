@@ -10,18 +10,19 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       145,          7]
-NotebookDataLength[    250571,       5140]
-NotebookOptionsPosition[    247957,       5058]
-NotebookOutlinePosition[    248598,       5083]
-CellTagsIndexPosition[    248555,       5080]
+NotebookDataLength[    255966,       5188]
+NotebookOptionsPosition[    251261,       5100]
+NotebookOutlinePosition[    251968,       5125]
+CellTagsIndexPosition[    251925,       5122]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
 Cell["(* :Title:  IntroToSymmetry.m *)", "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[61]:=",ExpressionUUID->"06ce67c5-8a62-46ef-8fbd-8c71287a10ec"],
 
 Cell[TextData[{
  "(* :Author: Brian J. Cantwell (February, 1998),\nDepartment of Aeronautics \
@@ -178,7 +179,7 @@ changes, the package is designated version 4.2 dated May 20, 2010.",
  StyleBox["*)",
   FontColor->RGBColor[1, 0.5, 0]]
 }], "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
  CellChangeTimes->CompressedData["
 1:eJwdxU0oQwEAB/BtrSazJ8ZW85EdfC1prdFoK1NE5GMp5aKIyWFvLraUIaYm
@@ -190,7 +191,8 @@ abFe6ifxozuwgAvIjBnXeGcPcY9l+Amnvxs/sMKj+cHbVVwWRe8LOjg4HG7O
 x+UeinNCX5j25WJHt4XAk9RudtW8qgzLat2VeNVulOC8888GvJJa1Nvp1wXS
 KdznFJK8RERt/m3N/g/fmewv
   "],
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[62]:=",ExpressionUUID->"6c47b684-7c8c-4185-b3ad-798e599cf34f"],
 
 Cell["\<\
 (* :Copyright \[Copyright] 1998 Brian J. Cantwell.
@@ -208,10 +210,11 @@ more details.
 with this program; if not, write to the Free Software Foundation, Inc., 59 \
 Temple Place, Suite 330, Boston, MA  02111-1307  USA.*)\
 \>", "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
  CellChangeTimes->{{3.471123371247574*^9, 3.4711234403197603`*^9}},
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[63]:=",ExpressionUUID->"f9b67dfe-ff8f-4443-84fb-b7deb266106e"],
 
 Cell[TextData[{
  "\n (* :Summary:\nThis application program is used to solve for the \n\
@@ -437,7 +440,6 @@ xseon,zdeterminingequations,polyorder]\n\n",
   FontVariations->{"Underline"->True}],
  "\nxsefunctions\netafunctions\ninfinitesimalgroups\n\n",
  StyleBox["Express the table infinitesimal groups in terms of user variables",
-  
   FontVariations->{"Underline"->True}],
  "\ninfinitesimalgroups1=infinitesimalgroups/.{z1->x,z2->y,z3->u}\n\n",
  StyleBox["Construct the commutator table of the group",
@@ -448,19 +450,32 @@ independentvariables,dependentvariables,infinitesimalgroups1]\n\n",
   FontVariations->{"Underline"->True}],
  "\ncommutatortable\n*)"
 }], "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[64]:=",ExpressionUUID->"9d6ffbee-f0c0-4ea1-b9de-31e9a11e4b92"],
 
 Cell["(*Prepend the context SymmetryAnalysis` to $ContextPath*)", "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[66]:=",ExpressionUUID->"2688ffa1-4516-4b5d-8817-d38ae8e13cf4"],
+
+Cell[CellGroupData[{
 
 Cell["BeginPackage[\"SymmetryAnalysis`IntroToSymmetry`\"]", "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[67]:=",ExpressionUUID->"792f28a0-00a5-41ea-8048-659471c70202"],
+
+Cell[BoxData["\<\"SymmetryAnalysis`IntroToSymmetry`\"\>"], "Output",
+ CellChangeTimes->{{3.8335587391500883`*^9, 3.8335587421024485`*^9}, {
+  3.8336463933988967`*^9, 3.833646393779046*^9}, {3.8337143806089272`*^9, 
+  3.833714381392311*^9}, {3.833714439013553*^9, 3.8337144421484303`*^9}, {
+  3.833714592489628*^9, 3.833714595946046*^9}},
+ CellLabel->"Out[67]=",ExpressionUUID->"a1f39a3b-bed9-4676-b70f-f56b69ad9268"]
+}, Open  ]],
 
 Cell["\<\
 GenerateVariableTable::usage=
@@ -470,9 +485,10 @@ table of all the various variables in x,y,y{1},y{2},...,y{porderoftheequation}.
 The output is a table of strings contained in 
 variablestringtable.\";\
 \>", "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[68]:=",ExpressionUUID->"0e43b39f-ccba-42c1-9a9c-fedad411500c"],
 
 Cell["\<\
 SecondTerm::usage=
@@ -483,9 +499,10 @@ generates the second term in the p-th order infinitesimal.
 Note that derivatives up to 14th order are permitted by
 program.\";\
 \>", "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[69]:=",ExpressionUUID->"853a4593-7e59-4532-b4fe-bae3fd2c4b15"],
 
 Cell["\<\
 PthInfinitesimal::usage=
@@ -496,9 +513,10 @@ function generates the first term in the p-th order
 infinitesimal. In the process it calls the function
 'SecondTerm'.\";\
 \>", "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[70]:=",ExpressionUUID->"9198d069-f70f-437d-afc7-1a51b75d3191"],
 
 Cell["\<\
 GenerateInfinitesimalTable::usage=
@@ -510,9 +528,10 @@ table is a call to 'PthInfinitesimal' which will be
 evaluated once it is determined which infinitesimals will be 
 needed.\";\
 \>", "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[71]:=",ExpressionUUID->"2262457d-5367-4a16-bed4-cdbf2039ab11"],
 
 Cell["\<\
 InvarianceConditionNoRules::usage=
@@ -523,9 +542,10 @@ in the invariance condition before the transformation rules
 have been applied. The result is contained in 
 'termsoftheInvarianceConditionNoRules'.\";\
 \>", "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[72]:=",ExpressionUUID->"def1b3fc-a81c-454c-8bbf-d5509d1fd338"],
 
 Cell["\<\
 InvarianceConditionRulesApplied::usage=
@@ -542,9 +562,10 @@ least two factors to insure the proper operation of the function
 'Cases' which is used in the next step. In the second table the
 factor of two has been removed.\";\
 \>", "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[73]:=",ExpressionUUID->"03b8d6e6-c651-4b7e-8e29-9573cd604ba2"],
 
 Cell["\<\
 MakeRulesArray::usage=
@@ -557,9 +578,10 @@ derivatives of the input equation up to the order of the
 Lie-Backlund variables. The results are contained in the
 table rulesarrayout.\";\
 \>", "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[74]:=",ExpressionUUID->"ba20ce5f-2d6b-4490-859b-37ac88472f75"],
 
 Cell["\<\
 FindDeterminingEquations::usage=
@@ -579,9 +601,10 @@ The correspondence between variables is contained in
 'ztableofrules'. These tables are the main output of the 
 package.\";\
 \>", "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[75]:=",ExpressionUUID->"651377bb-6507-4f8b-99ba-58f4d3163b25"],
 
 Cell["\<\
 SolveDeterminingEquations::usage=
@@ -599,9 +622,10 @@ power series expansion. The results are contained in the tables
 these tables are ordered according to the usual ordering of
 independent and dependent variables.\";\
 \>", "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[76]:=",ExpressionUUID->"e0e98fe1-560c-43a7-8f40-cd301b80060c"],
 
 Cell["\<\
 MakeCommutatorTable::usage=
@@ -614,9 +638,10 @@ The symbols used for 'independentvariables' and
 'infinitesimalgroupsxy'. The output is contained in the table
 'commutatortable'. This is the last function in the package.\";\
 \>", "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[77]:=",ExpressionUUID->"c65e5fba-3bf7-41a3-9d89-f9921603d4d8"],
 
 Cell[TextData[{
  StyleBox["(*Note that this is not an initialization cell.*)",
@@ -626,8 +651,9 @@ Cell[TextData[{
  StyleBox[";",
   FontColor->RGBColor[1, 0, 0]]
 }], "Input",
- PageWidth->PaperWidth,
- CellChangeTimes->{{3.4833625535682287`*^9, 3.483362594351852*^9}}],
+ PageWidth:>PaperWidth,
+ CellChangeTimes->{{3.4833625535682287`*^9, 3.483362594351852*^9}},
+ CellLabel->"In[78]:=",ExpressionUUID->"2b2e0a18-1ad9-47da-91a1-fd96323e339e"],
 
 Cell[BoxData[
  RowBox[{
@@ -656,7 +682,8 @@ Cell[BoxData[
     RowBox[{
      RowBox[{"ClearAll", "[", "\"\<`*\>\"", "]"}], ";"}],
     FontColor->RGBColor[1, 0, 0]]}]}]], "Input",
- CellChangeTimes->{{3.4833691317031803`*^9, 3.483369178752589*^9}}],
+ CellChangeTimes->{{3.4833691317031803`*^9, 3.483369178752589*^9}},
+ CellLabel->"In[80]:=",ExpressionUUID->"4b5b8c9f-0842-409a-a78f-6abd3617b316"],
 
 Cell[TextData[{
  StyleBox["(*Many of the names used are similar to one another.\nThe function \
@@ -665,9 +692,10 @@ warnings.*)",
   FontWeight->"Plain"],
  "\nOff[General::spell1];"
 }], "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[82]:=",ExpressionUUID->"ca60abce-1b2a-4822-b837-cfd223a6e79d"],
 
 Cell[TextData[{
  "(******BEGINNING*OF*FUNCTION*GenerateVariableTable*******)\n",
@@ -716,8 +744,7 @@ jindex],{jindex,1,numberindependentvars}]]<>\", \"<>\nStringReplace[\n\
 StringReplace[\nToString[\n\
 Table[{\"j\"<>ToString[numberindependentvars+1-jindex]<>\",0,\"<>ToString[\
 porderoftheequation]},\n\
-{jindex,1,numberindependentvars}]],\"{{\"->\"{\"],\"}}\"->\"}\"]<>\"]\";\n\n\
-",
+{jindex,1,numberindependentvars}]],\"{{\"->\"{\"],\"}}\"->\"}\"]<>\"]\";\n\n",
  StyleBox["(*This step generates a table of lists of derivative\nindices.*)",
   FontWeight->"Plain"],
  "\nderivindtable=\nFlatten[\n\
@@ -795,10 +822,11 @@ variables.*)",
 yderivtableofstrings];])\n\
 (**********END*OF*FUNCTION*GenerateVariableTable*******)"
 }], "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
  CellChangeTimes->{{3.4833078786469927`*^9, 3.483307879347568*^9}},
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[84]:=",ExpressionUUID->"ffa865e5-588c-41a1-a4f8-e1068d9fecbe"],
 
 Cell[TextData[{
  "(************BEGINNING*OF*FUNCTION*SecondTerm**********)\n",
@@ -839,8 +867,7 @@ ToString[withoutindvarstringtable],\n\"{\"->\"\"],\"}\"->\"\"];\n\n",
 independent variables with respect to which\nthe p-th extension is \
 generated.*)",
   FontWeight->"Plain"],
- "\nderivaar=Table[\nToExpression[\"j\"<>ToString[ind]],{ind,1,plocal}];\n\n\
-",
+ "\nderivaar=Table[\nToExpression[\"j\"<>ToString[ind]],{ind,1,plocal}];\n\n",
  StyleBox["(*Now generate the sum of y's times xse's in the\nsecond term of \
 the plocal-th infinitesimal.*)",
   FontWeight->"Plain"],
@@ -853,12 +880,13 @@ Table[\n\", x\"<>ToString[derivaar[[jindex]]],\n\
 {beta,1,numberindependentvars}]]])\n\
 (*****************END*OF*FUNCTION*SecondTerm*********)"
 }], "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
  CellChangeTimes->{{3.483363441785419*^9, 3.483363442982726*^9}, {
    3.483363912634837*^9, 3.483363912952457*^9}, {3.4833652194680157`*^9, 
    3.483365251178897*^9}, 3.483365782624271*^9},
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[88]:=",ExpressionUUID->"96131d88-d33d-42f5-b6f1-4bad992fe9e5"],
 
 Cell[TextData[{
  "(*******BEGINNING*OF*FUNCTION*PthInfinitesimal*******)\n",
@@ -902,7 +930,6 @@ strings. The function generates the first \nterm in the p-th order \
 infinitesimal. The 'If' statement,\ndepending on the value of the parameter \
 'xseon', determines \nwhether the infinitesimal transformations of the \n\
 independent variables (the xse's) are to be included in \nthe computation.*)",
-  
   FontWeight->"Plain"],
  "\nIf[xseon>0,\nfirstpthorderterm=\n\
 ToExpression[Table[\"D[\",{pind,1,porderoftheequation}]<>\n\
@@ -932,7 +959,7 @@ j9,j10,j11,j12,j13,j14]],\npthextendedinfinitesimal=\n\
 ExpandAll[firstpthorderterm]]])\n\
 (**********END*OF*FUNCTION*PthInfinitesimal************)"
 }], "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
  CellChangeTimes->{{3.4833635179045143`*^9, 3.4833635183044167`*^9}, {
    3.4833639409297123`*^9, 3.483363941321772*^9}, {3.483365299131412*^9, 
@@ -940,7 +967,8 @@ ExpandAll[firstpthorderterm]]])\n\
    3.483366793744459*^9}, {3.4833692242257757`*^9, 3.4833692294230003`*^9}, {
    3.4833695344609547`*^9, 3.4833695599080353`*^9}, {3.4833913703160477`*^9, 
    3.483391398298284*^9}, 3.4833914940126963`*^9},
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[92]:=",ExpressionUUID->"0fb160ac-6fa7-4e1f-8fff-b9fc6a5497dc"],
 
 Cell[TextData[{
  "(**BEGINNING*OF*FUNCTION*GenerateInfinitesimalTable****)\n",
@@ -1021,8 +1049,7 @@ jindex],{jindex,1,numberindependentvars}]]<>\", \"<>\nStringReplace[\n\
 StringReplace[\nToString[\n\
 Table[{\"j\"<>ToString[numberindependentvars+1-jindex]<>\",0,\"<>ToString[\
 porderoftheequation]},\n\
-{jindex,1,numberindependentvars}]],\"{{\"->\"{\"],\"}}\"->\"}\"]<>\"]\";\n\n\
-",
+{jindex,1,numberindependentvars}]],\"{{\"->\"{\"],\"}}\"->\"}\"]<>\"]\";\n\n",
  StyleBox["(*This step generates a table of lists of derivative\nindices*)",
   FontWeight->"Plain"],
  "\nderivindtable=\nFlatten[\n\
@@ -1119,10 +1146,11 @@ infinitesimaltableofstrings[[k]],\n\"yindex=\"->\"yindex=\"<>ToString[i]],\n\
 infinitesimaltableofstringsally];])\n\
 (****END*OF*FUNCTION*GenerateInfinitesimalTable****)"
 }], "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
  CellChangeTimes->{{3.469460197281373*^9, 3.469460198127453*^9}},
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[96]:=",ExpressionUUID->"c6d392ff-f6e3-459b-87d4-276c9c115d91"],
 
 Cell[TextData[{
  "(**BEGINNING*OF*FUNCTION*InvarianceConditionNoRules**)\n",
@@ -1322,9 +1350,11 @@ finalinvarianceconditionsumnorules[[ifinally]],\n\
 {ifinally,1,numberofterms}];])\n\
 (******END*OF*FUNCTION*InvarianceConditionNoRules*****)"
 }], "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->
+  "In[100]:=",ExpressionUUID->"c3e8364f-4587-4c78-9616-5cc99e9e871d"],
 
 Cell[TextData[{
  "(*********BEGINNING*OF*FUNCTION*MakeRulesArray********)\n",
@@ -1373,7 +1403,6 @@ expression.*)",
  "\nrighthandterm=ToExpression[StringTake[\nrulesarraystring,\n\
 {arrowposition[[2]]+1,rulesarraystringlength}]];\n\n",
  StyleBox["(*Pick off the left hand term and convert it to an\nexpression.*)",
-  
   FontWeight->"Plain"],
  "\nlefthandterm=ToExpression[StringTake[\n\
 rulesarraystring,{1,arrowposition[[1]]-1}]];\n\n",
@@ -1401,8 +1430,7 @@ of the original rule.*)",
  StyleBox["(*Convert each outer item in the table to a string.*)",
   FontWeight->"Plain"],
  "\nderivativeindsstrings=Table[ToString[Flatten[\n\
-derivativeindicessofar[[ind]]]],\n{ind,1,lengthofderivativeindextable}];\n\n\
-",
+derivativeindicessofar[[ind]]]],\n{ind,1,lengthofderivativeindextable}];\n\n",
  StyleBox["(*Now form the derivative expressions operating\non the left hand \
 term in the original rule. Note\nthat the derivatives are executed.*)",
   FontWeight->"Plain"],
@@ -1438,7 +1466,6 @@ rulesarrayexpandedtable1sep98.*)",
   FontWeight->"Plain"],
  "\nrulesarrayexpandedtable1sep98=rulesarrayexpandedtable1;\n\n",
  StyleBox["rulesarrayexpandedtable1sep98check=rulesarrayexpandedtable1sep98;",
-  
   FontColor->RGBColor[1, 0, 0]],
  "\n\n",
  StyleBox["(*Now combine with the original set of rules to make\nthe expanded \
@@ -1447,9 +1474,11 @@ set of rules.*)",
  "\nrulesarrayexpanded=\nJoin[rulesarray,rulesarrayexpandedtable1];])\n\
 (************END*OF*FUNCTION*MakeRulesArray***********)"
 }], "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->
+  "In[104]:=",ExpressionUUID->"4f8bea0c-71a3-4a05-99d1-8af8fd832d41"],
 
 Cell[TextData[{
  "(**BEGINNING*OF*FUNCTION*InvarianceConditionRulesApplied**)\n",
@@ -1798,11 +1827,13 @@ list ztableofrules. Clearing all j's at this point prevents the problem.*)",
   FontColor->RGBColor[1, 0, 0]],
  "])\n(*****END*OF*FUNCTION*InvarianceConditionRulesApplied********)"
 }], "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
  CellChangeTimes->{{3.4833916281720543`*^9, 3.483391645876363*^9}, {
   3.483392306566474*^9, 3.483392577698874*^9}},
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->
+  "In[108]:=",ExpressionUUID->"f2a36563-11f1-4b7a-88fa-258dbe2debf8"],
 
 Cell[TextData[{
  "(****BEGINNING*OF*FUNCTION*FindDeterminingEquations*******)\n",
@@ -2539,7 +2570,6 @@ infinitesimalproducttable is = ``, ",
   FontColor->RGBColor[1, 0, 0]],
  StyleBox["the time used = \
 ``\",Length[infinitesimalproducttable],ByteCount[infinitesimalproducttable],",
-  
   FontVariations->{"CompatibilityType"->0},
   FontColor->RGBColor[1, 0, 0]],
  StyleBox["MemoryInUse[],",
@@ -2651,7 +2681,6 @@ ytermsmatchtableoflengths is = ``, ",
   FontColor->RGBColor[1, 0, 0]],
  StyleBox["the time used = \
 ``\",Length[ytermsmatchtableoflengths],ByteCount[ytermsmatchtableoflengths],",
-  
   FontVariations->{"CompatibilityType"->0},
   FontColor->RGBColor[1, 0, 0]],
  StyleBox["MemoryInUse[],",
@@ -3116,7 +3145,6 @@ determiningequationstable is = ``, ",
   FontColor->RGBColor[1, 0, 0]],
  StyleBox["the time used = \
 ``\",Length[determiningequationstable],ByteCount[determiningequationstable],",
-  
   FontVariations->{"CompatibilityType"->0},
   FontColor->RGBColor[1, 0, 0]],
  StyleBox["MemoryInUse[],",
@@ -3206,8 +3234,7 @@ a set of dummy variables.*)",
 rorderofinfinitesimals];\n\n",
  StyleBox["(*Convert these strings to expressions.*)",
   FontWeight->"Plain"],
- "\ninfinitesimalindepvariabletable=\nToExpression[variablestringtable];\n\n\
-",
+ "\ninfinitesimalindepvariabletable=\nToExpression[variablestringtable];\n\n",
  StyleBox["(*The number of dummy variables that need to be \ngenerated.*)",
   FontWeight->"Plain"],
  "\ninfinitesimalindepvariabletablelength=\n\
@@ -3225,8 +3252,7 @@ infinitesimalindepvariabletable[[indx]]]]<>\n\
 {indx,1,infinitesimalindepvariabletablelength}];\n\n",
  StyleBox["(*Convert the strings to expressions.*)",
   FontWeight->"Plain"],
- "\nztableofrulesxytoz=\nToExpression[dummyvariabletableofrulesstrings];\n\n\
-",
+ "\nztableofrulesxytoz=\nToExpression[dummyvariabletableofrulesstrings];\n\n",
  StyleBox["(*Be able to view this table*)",
   FontWeight->"Plain",
   FontVariations->{"CompatibilityType"->0}],
@@ -3360,7 +3386,6 @@ problems. The problem at this point (at the end of FindDeterminingEquations) \
 is that j1 has been assigned the value 1. If the notebook is run again the j1 \
 will be replaced by 1 in several places in particular in the input equation \
 in generic variables. Clearing all j's at this point prevents the problem.*)",
-  
   FontWeight->"Plain"],
  StyleBox["\nClear[\"j*\"];",
   FontColor->RGBColor[1, 0, 0]],
@@ -3385,7 +3410,7 @@ converting between z-variables and generic variables are contained in the \
 table ztableofrulesxy.\"];])\n\
 (******END*OF*FUNCTION*FindDeterminingEquations*******)"
 }], "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
  CellChangeTimes->{{3.469376885357332*^9, 3.469376902076983*^9}, {
    3.469376933976013*^9, 3.469376978311532*^9}, {3.469377594656692*^9, 
@@ -3416,7 +3441,9 @@ table ztableofrulesxy.\"];])\n\
    3.4833926768555717`*^9, 3.483393122976851*^9}, {3.483393174443096*^9, 
    3.483393181087143*^9}, {3.483393240605276*^9, 3.483393428294441*^9}, {
    3.48339346545604*^9, 3.483393494408843*^9}},
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->
+  "In[112]:=",ExpressionUUID->"31816041-89fb-4f4b-b569-94f97d2f2939"],
 
 Cell[TextData[{
  "(****** *BEGINNING*OF*FUNCTION*SolveDeterminingEquations****)\n",
@@ -3542,8 +3569,7 @@ ToString[xseclearstring1],\"{\"->\"\"],\"}\"->\"\"];\n",
  StyleBox["(*Clear the variable names for the 'eta' infinitesimals. First \
 construct\na table of strings with the infinitesimal names.*)",
   FontWeight->"Plain"],
- "\netaclearstring1=Table[\"eta\"<>ToString[i],{i,1,numberdependentvars}];\n\
-",
+ "\netaclearstring1=Table[\"eta\"<>ToString[i],{i,1,numberdependentvars}];\n",
  StyleBox["\n",
   FontColor->RGBColor[0.5, 0, 0.5]],
  StyleBox["(*Print[StringForm[\"Step10 = ``\",TimeUsed[]]];*)",
@@ -3974,8 +4000,7 @@ ToString[InputForm[etafunctionsumtable[[i]]]],{i,1,numberdependentvars}];\n",
  "\n\n\n",
  StyleBox["(*The number of determining equations.*)",
   FontWeight->"Plain"],
- "\nzdeterminingequationstablelength=\nLength[zdeterminingequationstable];\n\
-",
+ "\nzdeterminingequationstablelength=\nLength[zdeterminingequationstable];\n",
  StyleBox["\n",
   FontColor->RGBColor[0.5, 0, 0.5]],
  StyleBox["(*Print[StringForm[\"Step43 = ``\",TimeUsed[]]];*)",
@@ -3997,8 +4022,7 @@ evaluated. \nChanging names slightly prevents the original table\nof \
 determining equations from being modified.*)",
   FontWeight->"Plain"],
  "\nzdeterminingequationstablexxseeetastrings=\nStringReplace[StringReplace[\n\
-zdeterminingequationstablestrings,\"xse\"->\"xxse\"],\n\"eta\"->\"eeta\"];\n\
-",
+zdeterminingequationstablestrings,\"xse\"->\"xxse\"],\n\"eta\"->\"eeta\"];\n",
  StyleBox["\n",
   FontColor->RGBColor[0.5, 0, 0.5]],
  StyleBox["(*Print[StringForm[\"Step45 = ``\",TimeUsed[]]];*)",
@@ -4718,8 +4742,7 @@ final output is presented as a table of strings.*)",
   FontWeight->"Plain"],
  "\netainfinitesimalstrings=Table[\n\"eta\"<>ToString[i]<>\n\
 \"[\"<>zvariablesundefinedstring<>\"]\"<>\"=\"<>\n\
-ToString[InputForm[etainfinitesimals1[[i]]]],{i,1,numberdependentvars}];\n\n\
-",
+ToString[InputForm[etainfinitesimals1[[i]]]],{i,1,numberdependentvars}];\n\n",
  StyleBox["(*Print[StringForm[\"Step75 = ``\",TimeUsed[]]];*)",
   FontColor->RGBColor[1, 0, 0]],
  "\n\n",
@@ -4789,7 +4812,7 @@ orders. If terms of ever increasing order appear, then an arbitrary function \
 is indicated.\"];])\n\
 (**********END*OF*FUNCTION*SolveDeterminingEquations*****)"
 }], "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
  CellChangeTimes->{{3.470158879504171*^9, 3.470158885572098*^9}, {
    3.470158937626791*^9, 3.470158954390167*^9}, {3.470158988093308*^9, 
@@ -4953,7 +4976,9 @@ is indicated.\"];])\n\
    3.471543156227499*^9}, {3.471543188286233*^9, 3.4715432213609047`*^9}, {
    3.4715434166000233`*^9, 3.47154346009956*^9}, {3.471543502357615*^9, 
    3.4715435115837584`*^9}, {3.471543575932949*^9, 3.471543585038908*^9}},
- ImageRegion->{{0, 1}, {0, 1}}],
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->
+  "In[116]:=",ExpressionUUID->"554f4184-e638-441d-adb5-c55d8505cf17"],
 
 Cell[TextData[{
  "(******BEGINNING*OF*FUNCTION*MakeCommutatorTable*********)\n",
@@ -5028,9 +5053,13 @@ will have terms that cancel. To get rid of these terms use the function \
 Simplify before viewing the table.\"];])\n \
 (*****END*OF*FUNCTION*MakeCommutatorTable********************)"
 }], "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
- CellChangeTimes->{{3.47113260091496*^9, 3.471132606784225*^9}}],
+ CellChangeTimes->{{3.47113260091496*^9, 3.471132606784225*^9}},
+ CellLabel->
+  "In[120]:=",ExpressionUUID->"126d10b6-f83e-420f-85b7-d5bff89f16c6"],
+
+Cell[CellGroupData[{
 
 Cell[TextData[{
  StyleBox["(*Note that this is not an initialization cell.*)",
@@ -5038,7 +5067,16 @@ Cell[TextData[{
   FontVariations->{"CompatibilityType"->0}],
  "\nEnd[]"
 }], "Input",
- PageWidth->PaperWidth],
+ PageWidth:>PaperWidth,
+ CellLabel->
+  "In[124]:=",ExpressionUUID->"c612dac8-6df8-4408-a881-767a632a4675"],
+
+Cell[BoxData["\<\"SymmetryAnalysis`IntroToSymmetry`Private`\"\>"], "Output",
+ CellChangeTimes->{3.833558742444982*^9, 3.8336463940190916`*^9, 
+  3.833714381862836*^9, 3.833714442650089*^9, 3.833714596608968*^9},
+ CellLabel->
+  "Out[125]=",ExpressionUUID->"fc00d07d-f43b-41e9-9c7c-290d45a56f1c"]
+}, Open  ]],
 
 Cell[BoxData[
  RowBox[{
@@ -5049,27 +5087,31 @@ Cell[BoxData[
     "InvarianceConditionRulesApplied", ",", "MakeRulesArray", ",", 
     "FindDeterminingEquations", ",", "SolveDeterminingEquations", ",", 
     "MakeCommutatorTable"}], "]"}], ";"}]], "Input",
- PageWidth->PaperWidth],
+ PageWidth:>PaperWidth,
+ CellLabel->
+  "In[126]:=",ExpressionUUID->"83029c5f-1ee8-4919-9ef6-16ca34b2d1c1"],
 
 Cell["EndPackage[]", "Input",
- PageWidth->PaperWidth,
+ PageWidth:>PaperWidth,
  InitializationCell->True,
- ImageRegion->{{0, 1}, {0, 1}}]
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->
+  "In[127]:=",ExpressionUUID->"9eabb658-7823-4904-bf13-893847a0f5a3"]
 },
 AutoGeneratedPackage->Automatic,
 WindowToolbars->{},
 CellGrouping->Manual,
-WindowSize->{842, 1024},
-WindowMargins->{{31, Automatic}, {Automatic, 31}},
+WindowSize->{841.5, 576.6},
+WindowMargins->{{30.599999999999998`, Automatic}, {Automatic, 0}},
 PrintingCopies->1,
 PrintingPageRange->{1, Automatic},
-PrivateNotebookOptions->{"ColorPalette"->{RGBColor, -1}},
+PrivateNotebookOptions->{"VersionedStylesheet"->{"Default.nb"[8.] -> False}},
+TaggingRules->{"TryRealOnly" -> False},
 ShowCellLabel->True,
 ShowCellTags->False,
-RenderingOptions->{"ObjectDithering"->True,
-"RasterDithering"->False},
-FrontEndVersion->"7.0 for Mac OS X x86 (32-bit) (February 18, 2009)",
-StyleDefinitions->"Default.nb"
+FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"49248a52-a80e-41e0-b2f8-77627b30d67e"
 ]
 (* End of Notebook Content *)
 
@@ -5082,68 +5124,73 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[545, 20, 132, 3, 27, "Input",
+Cell[545, 20, 211, 4, 45, "Input",ExpressionUUID->"06ce67c5-8a62-46ef-8fbd-8c71287a10ec",
  InitializationCell->True],
-Cell[680, 25, 11365, 167, 2640, "Input",
+Cell[759, 26, 11444, 168, 3615, "Input",ExpressionUUID->"6c47b684-7c8c-4185-b3ad-798e599cf34f",
  InitializationCell->True],
-Cell[12048, 194, 880, 19, 235, "Input",
+Cell[12206, 196, 959, 20, 317, "Input",ExpressionUUID->"f9b67dfe-ff8f-4443-84fb-b7deb266106e",
  InitializationCell->True],
-Cell[12931, 215, 16107, 237, 5227, "Input",
+Cell[13168, 218, 16183, 237, 7270, "Input",ExpressionUUID->"9d6ffbee-f0c0-4ea1-b9de-31e9a11e4b92",
  InitializationCell->True],
-Cell[29041, 454, 157, 3, 27, "Input",
+Cell[29354, 457, 236, 4, 27, "Input",ExpressionUUID->"2688ffa1-4516-4b5d-8817-d38ae8e13cf4",
  InitializationCell->True],
-Cell[29201, 459, 151, 3, 27, "Input",
+Cell[CellGroupData[{
+Cell[29615, 465, 230, 4, 45, "Input",ExpressionUUID->"792f28a0-00a5-41ea-8048-659471c70202",
  InitializationCell->True],
-Cell[29355, 464, 404, 10, 105, "Input",
+Cell[29848, 471, 416, 5, 32, "Output",ExpressionUUID->"a1f39a3b-bed9-4676-b70f-f56b69ad9268"]
+}, Open  ]],
+Cell[30279, 479, 483, 11, 147, "Input",ExpressionUUID->"0e43b39f-ccba-42c1-9a9c-fedad411500c",
  InitializationCell->True],
-Cell[29762, 476, 411, 11, 118, "Input",
+Cell[30765, 492, 490, 12, 181, "Input",ExpressionUUID->"853a4593-7e59-4532-b4fe-bae3fd2c4b15",
  InitializationCell->True],
-Cell[30176, 489, 434, 11, 105, "Input",
+Cell[31258, 506, 513, 12, 181, "Input",ExpressionUUID->"9198d069-f70f-437d-afc7-1a51b75d3191",
  InitializationCell->True],
-Cell[30613, 502, 508, 12, 144, "Input",
+Cell[31774, 520, 587, 13, 198, "Input",ExpressionUUID->"2262457d-5367-4a16-bed4-cdbf2039ab11",
  InitializationCell->True],
-Cell[31124, 516, 493, 11, 144, "Input",
+Cell[32364, 535, 572, 12, 144, "Input",ExpressionUUID->"def1b3fc-a81c-454c-8bbf-d5509d1fd338",
  InitializationCell->True],
-Cell[31620, 529, 827, 17, 274, "Input",
+Cell[32939, 549, 906, 18, 274, "Input",ExpressionUUID->"03b8d6e6-c651-4b7e-8e29-9573cd604ba2",
  InitializationCell->True],
-Cell[32450, 548, 583, 13, 170, "Input",
+Cell[33848, 569, 662, 14, 170, "Input",ExpressionUUID->"ba20ce5f-2d6b-4490-859b-37ac88472f75",
  InitializationCell->True],
-Cell[33036, 563, 957, 20, 287, "Input",
+Cell[34513, 585, 1036, 21, 287, "Input",ExpressionUUID->"651377bb-6507-4f8b-99ba-58f4d3163b25",
  InitializationCell->True],
-Cell[33996, 585, 883, 18, 300, "Input",
+Cell[35552, 608, 962, 19, 300, "Input",ExpressionUUID->"e0e98fe1-560c-43a7-8f40-cd301b80060c",
  InitializationCell->True],
-Cell[34882, 605, 577, 13, 183, "Input",
+Cell[36517, 629, 656, 14, 183, "Input",ExpressionUUID->"c65e5fba-3bf7-41a3-9d89-f9921603d4d8",
  InitializationCell->True],
-Cell[35462, 620, 325, 9, 40, "Input"],
-Cell[35790, 631, 938, 27, 58, "Input"],
-Cell[36731, 660, 327, 9, 66, "Input",
+Cell[37176, 645, 404, 10, 40, "Input",ExpressionUUID->"2b2e0a18-1ad9-47da-91a1-fd96323e339e"],
+Cell[37583, 657, 1017, 28, 58, "Input",ExpressionUUID->"4b5b8c9f-0842-409a-a78f-6abd3617b316"],
+Cell[38603, 687, 406, 10, 96, "Input",ExpressionUUID->"ca60abce-1b2a-4822-b837-cfd223a6e79d",
  InitializationCell->True],
-Cell[37061, 671, 6579, 129, 2185, "Input",
+Cell[39012, 699, 6656, 129, 2918, "Input",ExpressionUUID->"ffa865e5-588c-41a1-a4f8-e1068d9fecbe",
  InitializationCell->True],
-Cell[43643, 802, 2756, 58, 820, "Input",
+Cell[45671, 830, 2833, 58, 1099, "Input",ExpressionUUID->"96131d88-d33d-42f5-b6f1-4bad992fe9e5",
  InitializationCell->True],
-Cell[46402, 862, 4335, 80, 1223, "Input",
+Cell[48507, 890, 4411, 80, 1223, "Input",ExpressionUUID->"0fb160ac-6fa7-4e1f-8fff-b9fc6a5497dc",
  InitializationCell->True],
-Cell[50740, 944, 8597, 180, 2653, "Input",
+Cell[52921, 972, 8674, 180, 2653, "Input",ExpressionUUID->"c6d392ff-f6e3-459b-87d4-276c9c115d91",
  InitializationCell->True],
-Cell[59340, 1126, 9947, 200, 2575, "Input",
+Cell[61598, 1154, 10030, 202, 3479, "Input",ExpressionUUID->"c3e8364f-4587-4c78-9616-5cc99e9e871d",
  InitializationCell->True],
-Cell[69290, 1328, 6001, 123, 1730, "Input",
+Cell[71631, 1358, 6076, 122, 2357, "Input",ExpressionUUID->"4f8bea0c-71a3-4a05-99d1-8af8fd832d41",
  InitializationCell->True],
-Cell[75294, 1453, 20398, 351, 7203, "Input",
+Cell[77710, 1482, 20481, 353, 9735, "Input",ExpressionUUID->"f2a36563-11f1-4b7a-88fa-258dbe2debf8",
  InitializationCell->True],
-Cell[95695, 1806, 70512, 1612, 14938, "Input",
+Cell[98194, 1837, 70579, 1608, 20173, "Input",ExpressionUUID->"31816041-89fb-4f4b-b569-94f97d2f2939",
  InitializationCell->True],
-Cell[166210, 3420, 76733, 1535, 20112, "Input",
+Cell[168776, 3447, 76808, 1533, 27534, "Input",ExpressionUUID->"554f4184-e638-441d-adb5-c55d8505cf17",
  InitializationCell->True],
-Cell[242946, 4957, 4260, 75, 1171, "Input",
+Cell[245587, 4982, 4343, 77, 1643, "Input",ExpressionUUID->"126d10b6-f83e-420f-85b7-d5bff89f16c6",
  InitializationCell->True],
-Cell[247209, 5034, 194, 6, 40, "Input"],
-Cell[247406, 5042, 432, 9, 103, "Input"],
-Cell[247841, 5053, 112, 3, 27, "Input",
+Cell[CellGroupData[{
+Cell[249955, 5063, 277, 8, 46, "Input",ExpressionUUID->"c612dac8-6df8-4408-a881-767a632a4675"],
+Cell[250235, 5073, 294, 4, 32, "Output",ExpressionUUID->"fc00d07d-f43b-41e9-9c7c-290d45a56f1c"]
+}, Open  ]],
+Cell[250544, 5080, 515, 11, 124, "Input",ExpressionUUID->"83029c5f-1ee8-4919-9ef6-16ca34b2d1c1"],
+Cell[251062, 5093, 195, 5, 75, "Input",ExpressionUUID->"9eabb658-7823-4904-bf13-893847a0f5a3",
  InitializationCell->True]
 }
 ]
 *)
 
-(* End of internal cache information *)
