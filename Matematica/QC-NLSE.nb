@@ -1,0 +1,778 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     33362,        770]
+NotebookOptionsPosition[     25986,        658]
+NotebookOutlinePosition[     26514,        677]
+CellTagsIndexPosition[     26471,        674]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Clear all symbols in the current context.", "Text",
+ CellChangeTimes->{{3.4715644485587473`*^9, 
+  3.47156448605101*^9}},ExpressionUUID->"672c6dea-9177-4046-9d20-\
+467d779b830d"],
+
+Cell[BoxData[
+ RowBox[{"ClearAll", "[", 
+  RowBox[{"Evaluate", "[", 
+   RowBox[{
+    RowBox[{"Context", "[", "]"}], "<>", "\"\<*\>\""}], "]"}], "]"}]], "Input",
+ CellLabel->
+  "In[128]:=",ExpressionUUID->"addc9a63-fc2c-4cdc-878d-969f18a4d703"],
+
+Cell[TextData[{
+ StyleBox["First read in the package which is located in User Home \
+Folder/Library/",
+  FontWeight->"Plain"],
+ StyleBox["Mathematica",
+  FontWeight->"Plain",
+  FontSlant->"Italic"],
+ StyleBox["/Applications/SymmetryAnalysis. (Download this from Cantwell\
+\[CloseCurlyQuote]s site, package required for Lie analysis)",
+  FontWeight->"Plain"]
+}], "Text",
+ CellChangeTimes->{{3.472046215957556*^9, 3.472046255573135*^9}, {
+  3.472046289795615*^9, 3.472046308115048*^9}, {3.4720466725423717`*^9, 
+  3.472046673357225*^9}, {3.8322133109680367`*^9, 3.8322133349153824`*^9}},
+ ImageRegion->{{0, 1}, {0, 
+  1}},ExpressionUUID->"c52037ec-0337-4eda-ad87-9dabb09dcd3b"],
+
+Cell["Needs[\"SymmetryAnalysis`IntroToSymmetry`\"]", "Input",
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->
+  "In[129]:=",ExpressionUUID->"c2dce92a-c382-4f17-a4ab-dcb47d10c22d"],
+
+Cell[TextData[StyleBox["Enter the list of independent variables.",
+ FontWeight->"Plain"]], "Text",
+ ImageRegion->{{0, 1}, {0, 
+  1}},ExpressionUUID->"15219869-0daa-488d-a20a-c5e17d39efec"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"independentvariables", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<x\>\"", ",", "\"\<t\>\""}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.832212519159512*^9, 3.832212528253248*^9}, {
+  3.833889217269512*^9, 3.8338892221053944`*^9}},
+ CellLabel->
+  "In[130]:=",ExpressionUUID->"bfdad67b-e3d7-41f2-a92e-50c9b1804efa"],
+
+Cell[TextData[StyleBox["Enter the list of dependent variables.",
+ FontWeight->"Plain"]], "Text",
+ ImageRegion->{{0, 1}, {0, 
+  1}},ExpressionUUID->"bba78b02-5a6f-473d-9fa9-52136cf286dc"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"dependentvariables", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<u\>\"", ",", " ", "\"\<v\>\""}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.8322125361281815`*^9, 3.8322125649562736`*^9}, {
+  3.8338892335732718`*^9, 3.833889245727019*^9}},
+ CellLabel->
+  "In[131]:=",ExpressionUUID->"ee4cea9d-c32f-4e30-ab81-0919c535b0b5"],
+
+Cell[TextData[StyleBox["Enter the list of function and/or constant names that \
+need to be preserved when the equations are expressed in terms of generic \
+variables.",
+ FontWeight->"Plain"]], "Text",
+ ImageRegion->{{0, 1}, {0, 
+  1}},ExpressionUUID->"cfdadec1-4a78-4954-85c4-4ed3da7e195c"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"frozennames", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<a\>\"", ",", "\"\<b\>\"", ",", "\"\<c\>\""}], "}"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.832212559299383*^9, 3.8322125710402627`*^9}, {
+  3.833889251016636*^9, 3.83388925321163*^9}, {3.833889314160702*^9, 
+  3.8338893243602953`*^9}},
+ CellLabel->
+  "In[132]:=",ExpressionUUID->"fcf81d8e-b800-4031-8696-1299a49bb668"],
+
+Cell[TextData[StyleBox["Enter the maximum derivative order of the \ninput \
+equation(s).",
+ FontWeight->"Plain"]], "Text",
+ ImageRegion->{{0, 1}, {0, 
+  1}},ExpressionUUID->"a3a75e5e-ad79-4e3f-9d20-6fdfd0df48a7"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"p", "=", "3"}], ";"}]], "Input",
+ CellChangeTimes->{{3.832212582326071*^9, 3.832212582422094*^9}},
+ CellLabel->
+  "In[133]:=",ExpressionUUID->"99f94b48-3e32-40e4-9091-44c3aca05cc7"],
+
+Cell[TextData[StyleBox["The maximum derivative order that the infinitesimals \
+are assumed to depend on is specified by the input parameter r. This \
+parameter is only nonzero when the user is looking for Lie contact groups or \
+Lie-Backlund groups. For the usual case where one is searching for point \
+groups set r=0.",
+ FontWeight->"Plain"]], "Text",
+ ImageRegion->{{0, 1}, {0, 
+  1}},ExpressionUUID->"169ed71f-47cd-4061-9079-3683a40f8f38"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"r", "=", "0"}], ";"}]], "Input",
+ CellLabel->
+  "In[134]:=",ExpressionUUID->"23c4d2e6-0773-4954-9e26-cf165455deee"],
+
+Cell[TextData[StyleBox["When searching for Lie-Backlund groups ie. r=1 or \
+greater one can, without loss of generality, leave the independent variables \
+untransformed. The corresponding infinitesimals (the xse's) are set to zero \
+by setting xseon=0. If one is searching for point groups then set xseon=1. \
+The choice xseon=1 is also an option when looking for Lie-Backlund groups and \
+this can be useful when looking for contact symmetries.",
+ FontWeight->"Plain"]], "Text",
+ ImageRegion->{{0, 1}, {0, 
+  1}},ExpressionUUID->"3524de00-2451-4774-9ed2-4a8e9987f852"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"xseon", "=", "1"}], ";"}]], "Input",
+ CellLabel->
+  "In[135]:=",ExpressionUUID->"e2497cc9-aff3-4f18-8d99-268c2fa5276c"],
+
+Cell[TextData[StyleBox["When searching for Lie-Backlund groups it is \
+necessary to differentiate the input equations with respect to all \
+independent variables producing derivatives of order p+r. \nThese higher \
+order differential consequences are appended to the set of rules applied to \
+the invariance condition. This process is carried out automatically when \
+internalrules=1. For point groups the equation or equation system is the only \
+rule or set of rules needed and one sets internalrules=0.",
+ FontWeight->"Plain"]], "Text",
+ ImageRegion->{{0, 1}, {0, 
+  1}},ExpressionUUID->"40026053-4451-469a-9ace-b8eed30471f2"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"internalrules", "=", "0"}], ";"}]], "Input",
+ CellLabel->
+  "In[136]:=",ExpressionUUID->"a9966372-0b91-468c-bb1e-6936e878acb7"],
+
+Cell["\<\
+Construct the array of rules to be applied to the invariance condition. Get \
+these from your equations. I recommend trivially solving for your first term. \
+Parentheses okay to use\
+\>", "Text",
+ CellChangeTimes->{{3.832212795352461*^9, 3.83221279944093*^9}, {
+  3.832212984423888*^9, 3.8322129997465935`*^9}, {3.832213420461437*^9, 
+  3.8322134260227823`*^9}},ExpressionUUID->"8382d2ad-e111-4829-8a28-\
+6f33d5890687"],
+
+Cell["\<\
+rulesarray=
+{\"D[v[x, t],x,x,x] -> - a*D[v[x, t],t] + b*D[u[x, t],x,x,x] + c*(u[x,t]^2 + \
+v[x,t]^2)*u[x,t]\",
+\"D[u[x, t],x,x,x] -> - a*D[u[x, t],t] - b*D[v[x, t],x,x,x] - c*(u[x,t]^2 + \
+v[x,t]^2)*v[x,t]\"};\
+\>", "Input",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGAQBmIQfTOg/mBs7xvHWX9Lz4Fouf96f0A0Qwy/RByQ3hWn
+7wSio955uYPo9T19jSB6VtHCDhD9UWBb2oQJbxzzXKfngWiD+0/LQfSS4isd
+ILrKgX0iiP5iZQCmD22JnQeiBdS3LwDRHNe/nQbRDYqyZ0D0NuP3l0F0m63v
+bRD977C13kQgHVQcAqbNTQNFJwPpH909kiDaTvhpCIjeIm0bAaLlTqetAdEr
+bmuvA9Eqxg2bQPS8225bQXRUpWTjFCDNsnZyC4iumq6cswhI/31wNA9Ee0ye
+UAqil2w9BKZ7fsyqAtE3OB6DaQAmaaOK
+  "],
+ ImageRegion->{{0, 1}, {0, 
+  1}},ExpressionUUID->"e9260a34-73c5-488f-901d-f95aa2d9b210"],
+
+Cell["\<\
+Input your equations as strings, the LHS or RHS when the other is 0: \
+Parentheses okay to use\
+\>", "Text",
+ CellChangeTimes->{{3.8322127205026646`*^9, 3.8322127242710915`*^9}, {
+  3.8322127599727497`*^9, 3.8322127705018253`*^9}, {3.8322128262199693`*^9, 
+  3.8322128347330093`*^9}, {3.8322134163729324`*^9, 
+  3.8322134300392694`*^9}},ExpressionUUID->"2830fd9c-a569-444d-8b13-\
+088629257bca"],
+
+Cell["\<\
+inputequation1=
+\"-a*D[v[x, t],t] - D[v[x, t],x,x,x] + b*D[u[x, t],x,x,x] + c*(u[x,t]^2 + \
+v[x,t]^2)*u[x,t]\";\
+\>", "Input",
+ CellChangeTimes->{{3.8322127567074633`*^9, 3.8322127752059884`*^9}, {
+   3.832212854687887*^9, 3.8322129558039045`*^9}, {3.8322143567998133`*^9, 
+   3.8322145162914*^9}, {3.8338892836135216`*^9, 3.833889287620614*^9}, {
+   3.8338893554852457`*^9, 3.8338893870072794`*^9}, {3.8338894195093293`*^9, 
+   3.8338895669989295`*^9}, 3.833890191249878*^9, 3.8338902444613905`*^9, 
+   3.8338903255212812`*^9, {3.833926523861477*^9, 3.833926528452422*^9}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->
+  "In[138]:=",ExpressionUUID->"7ed0d7f7-e813-4162-870f-4ad9d05766f8"],
+
+Cell["\<\
+inputequation2=
+\"a*D[u[x, t],t] + D[u[x, t],x,x,x] + b*D[v[x, t],x,x,x] + c*(u[x,t]^2 + \
+v[x,t]^2)*v[x,t]\";\
+\>", "Input",
+ CellChangeTimes->{
+  3.832213352045519*^9, {3.8322138336398973`*^9, 3.8322140057736807`*^9}, {
+   3.833890108862759*^9, 3.83389011172546*^9}, {3.8338901417558985`*^9, 
+   3.8338901500598955`*^9}, {3.8338901860115166`*^9, 
+   3.8338902569264865`*^9}, {3.833891061855239*^9, 3.8338910622043047`*^9}, {
+   3.833926532222963*^9, 3.8339265362826343`*^9}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->
+  "In[139]:=",ExpressionUUID->"47f46df6-189c-406e-b7e4-965e2d4fdecf"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.8322127159200573`*^9, 3.8322127344495573`*^9}, 
+   3.832213354005495*^9, {3.832213756816433*^9, 3.8322138115026073`*^9}, {
+   3.8338901756432743`*^9, 3.8338901779448133`*^9}, 3.8338910996207137`*^9},
+ CellLabel->
+  "In[140]:=",ExpressionUUID->"e3ed7a8c-d5c8-4610-b403-7884652ab008"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Timing[FindDeterminingEquations[
+independentvariables,dependentvariables,frozennames,p,r,xseon,
+inputequation1,rulesarray,internalrules]]\
+\>", "Input",
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->
+  "In[141]:=",ExpressionUUID->"d59b39dd-960a-4569-8d5a-c92ed9e17417"],
+
+Cell[BoxData[
+ InterpretationBox["\<\"The function FindDetermining Equations has begun, the \
+memory in use = \\!\\(\\*RowBox[{\\\"106587976\\\"}]\\), the time used = \
+\\!\\(\\*RowBox[{\\\"0.6239999999999997`\\\"}]\\)\"\>",
+  StringForm[
+  "The function FindDetermining Equations has begun, the memory in use = ``, \
+the time used = ``", 106587976, 0.6239999999999997],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.833924264307556*^9, 3.833926553288037*^9, 
+  3.8339265972974143`*^9},
+ CellLabel->
+  "During evaluation of \
+In[141]:=",ExpressionUUID->"1d3b08b2-e16f-4176-ba14-83f93b4b88b6"]
+}, Open  ]],
+
+Cell["The determining equations of equation1.", "Text",ExpressionUUID->"5096cc2c-98fd-479f-8ead-95aff7429b45"],
+
+Cell["zdeterminingequations1=zdeterminingequations;", "Input",
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[46]:=",ExpressionUUID->"b12beb2a-36b3-4e82-a623-08238f8b4714"],
+
+Cell["\<\
+Now work out the determining equations of the Lie point group which leaves \
+equation2 invariant.\
+\>", "Text",ExpressionUUID->"7d484f0b-af12-4121-91c8-e585951ee762"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Timing[FindDeterminingEquations[
+independentvariables,dependentvariables,frozennames,p,r,xseon,
+inputequation2,rulesarray,internalrules]]\
+\>", "Input",
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[47]:=",ExpressionUUID->"700299b2-8677-4111-aed5-c667bee4d7d7"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0.`", ",", 
+   RowBox[{"FindDeterminingEquations", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\<\"x\"\>", ",", "\<\"t\"\>"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"u\"\>", ",", "\<\"v\"\>"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"a\"\>", ",", "\<\"b\"\>", ",", "\<\"c\"\>"}], "}"}], ",", 
+     "3", ",", "0", ",", "1", 
+     ",", "\<\"D[u[x, t],t] + a*D[u[x, t],x,x,x] + b*D[v[x, t],x,x,x] + \
+c*(u[x,t]^2 + v[x,t]^2)*v[x,t]\"\>", ",", 
+     RowBox[{"{", 
+      RowBox[{"\<\"a*D[v[x, t],x,x,x] -> - D[v[x, t],t] + b*D[u[x, t],x,x,x] \
++ c*(u[x,t]^2 + v[x,t]^2)*u[x,t]\"\>", 
+       ",", "\<\"a*D[u[x, t],x,x,x] -> - D[u[x, t],t] - b*D[v[x, t],x,x,x] - \
+c*(u[x,t]^2 + v[x,t]^2)*v[x,t]\"\>"}], "}"}], ",", "0"}], "]"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.4694730152358913`*^9, 3.471566767708144*^9, 3.483748214537696*^9, 
+   3.8322147838042088`*^9, 3.8335590372576847`*^9, 3.8338907027823467`*^9, 
+   3.8338910698875413`*^9, 3.833891192260784*^9, 3.8338912776736383`*^9, {
+   3.8338957514556947`*^9, 3.8338957586013937`*^9}},
+ CellLabel->"Out[47]=",ExpressionUUID->"92a2992e-26ca-43f9-8e8f-54ef0b7c0d7e"]
+}, Open  ]],
+
+Cell["The determiningequations of equation2.", "Text",ExpressionUUID->"aac6b9df-513f-4ebc-9810-2d9f023f5b78"],
+
+Cell["zdeterminingequations2=zdeterminingequations;", "Input",
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[48]:=",ExpressionUUID->"b432a29e-8d9d-4bb0-b349-8c2b72e9a8d9"],
+
+Cell["Repeat for equation3 ", "Text",
+ CellChangeTimes->{{3.8322146623755007`*^9, 
+  3.832214674657499*^9}},ExpressionUUID->"57022606-4ac7-443e-8e96-\
+2ea3a031f9d9"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.832214677135599*^9, 3.8322146887608924`*^9}, 
+   3.833890571059168*^9},
+ CellLabel->"In[49]:=",ExpressionUUID->"db2ad57c-999e-499c-b5bb-016536704520"],
+
+Cell["Now collect all the determining equations together.", "Text",ExpressionUUID->"9661a693-5b10-4cea-aa43-c03a34b1ff43"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+zdeterminingequations=
+Join[zdeterminingequations1,
+zdeterminingequations2];\
+\>", "Input",
+ CellChangeTimes->{{3.8322147026252456`*^9, 3.8322147082981405`*^9}, {
+  3.8338905792503576`*^9, 3.833890586976885*^9}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[50]:=",ExpressionUUID->"cd375bd4-b79e-4814-a7dd-6ddb399636ab"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "$RecursionLimit", "reclim2", 
+   "\"Recursion depth of \\!\\(\\*RowBox[{\\\"1024\\\"}]\\) exceeded during \
+evaluation of \\!\\(\\*RowBox[{\\\"Join\\\", \\\"[\\\", \
+RowBox[{\\\"zdeterminingequations\\\", \\\",\\\", \\\"zdeterminingequations\\\
+\"}], \\\"]\\\"}]\\).\"", 2, 50, 10, 19704363453324685635, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{{3.833895751499775*^9, 3.8338957586499243`*^9}},
+ CellLabel->
+  "During evaluation of \
+In[50]:=",ExpressionUUID->"53146c22-ba6e-401d-ab07-88dacb942d90"]
+}, Open  ]],
+
+Cell["How many determining equations are there altogether?", "Text",ExpressionUUID->"0c7d63fc-52be-43c7-83e0-ac8aaac2de6f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "[", "zdeterminingequations", "]"}]], "Input",
+ CellChangeTimes->{{3.832214711179323*^9, 3.832214711227334*^9}, 
+   3.833890589900833*^9},
+ CellLabel->"In[51]:=",ExpressionUUID->"4572b3cb-3747-4762-96a9-9a8100029749"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "$RecursionLimit", "reclim2", 
+   "\"Recursion depth of \\!\\(\\*RowBox[{\\\"1024\\\"}]\\) exceeded during \
+evaluation of \\!\\(\\*RowBox[{\\\"Join\\\", \\\"[\\\", \
+RowBox[{\\\"zdeterminingequations\\\", \\\",\\\", \\\"zdeterminingequations\\\
+\"}], \\\"]\\\"}]\\).\"", 2, 51, 11, 19704363453324685635, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{{3.833895751560611*^9, 3.833895758690213*^9}},
+ CellLabel->
+  "During evaluation of \
+In[51]:=",ExpressionUUID->"02451e8d-81e9-4c86-befc-e58d3e2830e8"],
+
+Cell[BoxData[
+ RowBox[{"Hold", "[", 
+  RowBox[{"Length", "[", "zdeterminingequations", "]"}], "]"}]], "Output",
+ CellChangeTimes->{
+  3.469473015346386*^9, 3.471566767812215*^9, 3.4837482146138477`*^9, 
+   3.8322148151845417`*^9, 3.8335590639450827`*^9, 3.833890702816256*^9, 
+   3.833891069920453*^9, 3.8338911922956915`*^9, 3.8338912777255325`*^9, {
+   3.8338957515665946`*^9, 3.8338957586954536`*^9}},
+ CellLabel->"Out[51]=",ExpressionUUID->"dac724f1-82c4-4454-9263-b5b1ac103906"]
+}, Open  ]],
+
+Cell["\<\
+Now solve the determining equations in terms of multivariable polynomials. \
+The Mathematica function Solve uses Gaussian elimination to solve a large \
+number of linear equations for the polynomial coefficients. The time roughly \
+follows
+
+time/timeref=((number of equations)/(number of equationsref))^n
+
+where the exponent is between 2.4 and 2.7. The Mathematica  function Timing \
+outputs the time required for the SolveDeterminingEquations function to \
+execute.\
+\>", "Text",ExpressionUUID->"610af152-b564-42a8-9ac5-e0575b9d747a"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Timing[SolveDeterminingEquations[
+independentvariables,dependentvariables,r,xseon,zdeterminingequations,order=3]\
+]\
+\>", "Input",
+ CellChangeTimes->{3.833890600431205*^9},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[52]:=",ExpressionUUID->"1a259947-7457-4268-8069-a9cc2e082939"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "$RecursionLimit", "reclim2", 
+   "\"Recursion depth of \\!\\(\\*RowBox[{\\\"1024\\\"}]\\) exceeded during \
+evaluation of \\!\\(\\*RowBox[{\\\"Join\\\", \\\"[\\\", \
+RowBox[{\\\"zdeterminingequations\\\", \\\",\\\", \\\"zdeterminingequations\\\
+\"}], \\\"]\\\"}]\\).\"", 2, 52, 12, 19704363453324685635, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{{3.83389575240302*^9, 3.83389575872828*^9}},
+ CellLabel->
+  "During evaluation of \
+In[52]:=",ExpressionUUID->"3a536a6a-b4a3-403f-bf9e-6a2cd63c17fe"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0.`", ",", 
+   RowBox[{"Hold", "[", 
+    RowBox[{"SolveDeterminingEquations", "[", 
+     RowBox[{
+     "independentvariables", ",", "dependentvariables", ",", "r", ",", 
+      "xseon", ",", "zdeterminingequations", ",", 
+      RowBox[{"order", "=", "3"}]}], "]"}], "]"}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.4694730155548267`*^9, 3.471566768303936*^9, 3.4837482148247967`*^9, 
+   3.83221482689403*^9, 3.8335590772833476`*^9, 3.833890703062598*^9, 
+   3.8338910702001104`*^9, 3.833891192529067*^9, 3.8338912779988103`*^9, {
+   3.833895752409004*^9, 3.833895758733268*^9}},
+ CellLabel->"Out[52]=",ExpressionUUID->"17d23365-733f-4f21-9122-3410533ef857"]
+}, Open  ]],
+
+Cell["\<\
+Here are the infinitesimal transformation functions for the independent \
+variables.\
+\>", "Text",ExpressionUUID->"a9a13f66-b7a2-4579-b09c-08f2b0cd5a42"],
+
+Cell[CellGroupData[{
+
+Cell["xsefunctions", "Input",
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[53]:=",ExpressionUUID->"ac639ce3-bfe9-4795-9cf3-39efb6fb8efb"],
+
+Cell[BoxData["xsefunctions"], "Output",
+ CellChangeTimes->{
+  3.4694730156648207`*^9, 3.4715667684469643`*^9, 3.483748214868608*^9, 
+   3.8322148269835596`*^9, 3.833559077434944*^9, 3.8338907031643243`*^9, 
+   3.8338910703003874`*^9, 3.83389119253904*^9, 3.833891278144039*^9, {
+   3.833895752639188*^9, 3.8338957587641835`*^9}},
+ CellLabel->"Out[53]=",ExpressionUUID->"cfd59ffa-235c-4765-b310-1568f209956a"]
+}, Open  ]],
+
+Cell["and for the dependent variables.", "Text",ExpressionUUID->"58820618-ca0a-47b4-ab39-64d4a444a5b0"],
+
+Cell[CellGroupData[{
+
+Cell["etafunctions", "Input",
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"In[54]:=",ExpressionUUID->"631aa7f3-6d5c-4154-8cb6-b08036e96b5b"],
+
+Cell[BoxData["etafunctions"], "Output",
+ CellChangeTimes->{
+  3.4694730157039137`*^9, 3.471566768497814*^9, 3.483748214997417*^9, 
+   3.8322148270150747`*^9, 3.83355907754191*^9, 3.833890703226159*^9, 
+   3.833891070374363*^9, 3.833891192550011*^9, 3.8338912782178416`*^9, {
+   3.833895752677568*^9, 3.83389575879601*^9}},
+ CellLabel->"Out[54]=",ExpressionUUID->"c5689ffa-eafb-4a11-a592-3119339c294b"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"infinitesimalgroupsxy", "=", 
+   RowBox[{"infinitesimalgroups", "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"z1", "\[Rule]", "x"}], ",", 
+      RowBox[{"z2", "\[Rule]", "t"}], ",", 
+      RowBox[{"z3", "\[Rule]", "u"}], ",", 
+      RowBox[{"z4", "\[Rule]", "v"}]}], "}"}]}]}], ";"}]], "Input",
+ CellLabel->"In[55]:=",ExpressionUUID->"3d110daa-5680-4518-9830-2493611415fa"],
+
+Cell["\<\
+Check the groups. xse's are on the left, eta's are on the right.\
+\>", "Text",ExpressionUUID->"529eff04-4568-4a0c-ac10-0e58603dc588"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Column", "[", "infinitesimalgroupsxy", "]"}]], "Input",
+ CellLabel->"In[56]:=",ExpressionUUID->"799c8795-f081-4c7a-a7a7-34c10092750c"],
+
+Cell[BoxData[
+ RowBox[{"Column", "[", "infinitesimalgroups", "]"}]], "Output",
+ CellChangeTimes->{
+  3.4694730157818623`*^9, 3.47156676859687*^9, 3.483748215047871*^9, 
+   3.832214827117111*^9, 3.8335590776896105`*^9, 3.833890703299962*^9, 
+   3.8338910704601336`*^9, 3.8338911925789337`*^9, 3.83389127830062*^9, {
+   3.8338957534135036`*^9, 3.833895758847716*^9}},
+ CellLabel->"Out[56]=",ExpressionUUID->"eb44129d-1590-40d4-8cfe-c0de28714ac8"]
+}, Open  ]],
+
+Cell["Check the infinitesimals in the determining equations.", "Text",
+ CellChangeTimes->{{3.471145395559845*^9, 
+  3.471145429404257*^9}},ExpressionUUID->"8c3d31f2-acb8-4ca5-96dc-\
+f97f71ae184f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Simplify", "[", 
+  RowBox[{"ToExpression", "[", "zdeterminingequations", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.471145481019026*^9, 3.4711455173104143`*^9}, 
+   3.471146122753789*^9, {3.47154140257237*^9, 3.471541418863482*^9}, {
+   3.4715667761993*^9, 3.4715667786858253`*^9}},
+ CellLabel->"In[57]:=",ExpressionUUID->"82ff981d-4a1e-4acf-9329-d55ed2c5cfe8"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "$RecursionLimit", "reclim2", 
+   "\"Recursion depth of \\!\\(\\*RowBox[{\\\"1024\\\"}]\\) exceeded during \
+evaluation of \\!\\(\\*RowBox[{\\\"Join\\\", \\\"[\\\", \
+RowBox[{\\\"zdeterminingequations\\\", \\\",\\\", \\\"zdeterminingequations\\\
+\"}], \\\"]\\\"}]\\).\"", 2, 57, 13, 19704363453324685635, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{{3.8338957534494076`*^9, 3.833895758890646*^9}},
+ CellLabel->
+  "During evaluation of \
+In[57]:=",ExpressionUUID->"4e6a9fd3-6e01-43ae-81c7-1d3925ca02e2"],
+
+Cell[BoxData[
+ RowBox[{"Hold", "[", 
+  RowBox[{"Simplify", "[", 
+   RowBox[{"ToExpression", "[", "zdeterminingequations", "]"}], "]"}], 
+  "]"}]], "Output",
+ CellChangeTimes->{{3.471566768668359*^9, 3.4715667796222754`*^9}, 
+   3.4837482150884247`*^9, 3.832214827384186*^9, 3.8335590778728037`*^9, 
+   3.83389070338673*^9, 3.8338910705359306`*^9, 3.8338911925928965`*^9, 
+   3.83389127837481*^9, {3.833895753455391*^9, 3.8338957588954077`*^9}},
+ CellLabel->"Out[57]=",ExpressionUUID->"cdb81d25-fd10-46d5-8a71-69700fd70c4c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"MakeCommutatorTable", "[", "\[IndentingNewLine]", 
+  RowBox[{
+  "independentvariables", ",", "dependentvariables", ",", 
+   "infinitesimalgroupsxy"}], "]"}]], "Input",
+ CellLabel->"In[58]:=",ExpressionUUID->"0f4b274b-d89c-4a2f-b661-ae34cd171a61"],
+
+Cell[BoxData[
+ RowBox[{"MakeCommutatorTable", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"\<\"x\"\>", ",", "\<\"t\"\>"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"u\"\>", ",", "\<\"v\"\>"}], "}"}], ",", 
+   "infinitesimalgroups"}], "]"}]], "Output",
+ CellChangeTimes->{{3.8338957535082493`*^9, 3.8338957589272766`*^9}},
+ CellLabel->"Out[58]=",ExpressionUUID->"d1fa82a0-b19f-4489-9b33-319696a47193"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"MatrixForm", "[", "commutatortable", "]"}]], "Input",
+ CellLabel->"In[59]:=",ExpressionUUID->"da1a0dab-8ca8-4459-9472-6d6fd840829c"],
+
+Cell[BoxData[
+ TagBox["commutatortable",
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.833559085177392*^9, 3.833890703520373*^9, 3.833891070672886*^9, 
+   3.8338911926168365`*^9, 3.8338912785214777`*^9, {3.8338957535451508`*^9, 
+   3.833895758959846*^9}},
+ CellLabel->
+  "Out[59]//MatrixForm=",ExpressionUUID->"1f559645-36e8-484e-9f09-\
+9627cf93eb34"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"MaxMemoryUsed", "[", " ", "]"}]], "Input",
+ CellLabel->"In[60]:=",ExpressionUUID->"b19e7c9c-a392-49fa-b4ff-7f1c5a673a06"],
+
+Cell[BoxData["129010568"], "Output",
+ CellChangeTimes->{
+  3.469473015900687*^9, 3.471566768868834*^9, 3.483748215190268*^9, 
+   3.8322148369016333`*^9, 3.833559085300067*^9, 3.833890703586196*^9, 
+   3.833891070747694*^9, 3.83389119262831*^9, 3.8338912785958405`*^9, {
+   3.833895753585044*^9, 3.8338957589908953`*^9}},
+ CellLabel->"Out[60]=",ExpressionUUID->"42cabfeb-c4aa-48b3-9516-56acb68fe0b4"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.8335591418934712`*^9, 3.8335591419153996`*^9}, 
+   3.8338906618743343`*^9},
+ CellLabel->"In[61]:=",ExpressionUUID->"a5ac3774-f5a8-4334-b524-c5830c644f66"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Export", "[", 
+  RowBox[{
+  "\"\<C:\\\\Users\\\\danit\\\\Documents\\\\Research\\\\Lie_Anaysis_RMHD-CHM_\
+Eqn\\\\RMHD-CHM-Lie-Analysis\\\\det_eqn\\\\QC-NLSE.csv\>\"", ",", 
+   "zdeterminingequations"}], "]"}]], "Input",
+ CellChangeTimes->{{3.8335591808639145`*^9, 3.833559241274438*^9}, {
+  3.8335592737712708`*^9, 3.8335592763657093`*^9}, {3.833559321243945*^9, 
+  3.8335593370555735`*^9}, {3.83356492070144*^9, 3.833564920993513*^9}, {
+  3.8335649570299916`*^9, 3.833564957104679*^9}, {3.8338906703096895`*^9, 
+  3.8338906799211597`*^9}, {3.8338907366343927`*^9, 3.8338907384074087`*^9}},
+ CellLabel->"In[62]:=",ExpressionUUID->"6b4b4a9a-3753-45ed-913c-c15b61b79b17"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "$RecursionLimit", "reclim2", 
+   "\"Recursion depth of \\!\\(\\*RowBox[{\\\"1024\\\"}]\\) exceeded during \
+evaluation of \\!\\(\\*RowBox[{\\\"Join\\\", \\\"[\\\", \
+RowBox[{\\\"zdeterminingequations\\\", \\\",\\\", \\\"zdeterminingequations\\\
+\"}], \\\"]\\\"}]\\).\"", 2, 62, 14, 19704363453324685635, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{{3.833895753632447*^9, 3.833895759033415*^9}},
+ CellLabel->
+  "During evaluation of \
+In[62]:=",ExpressionUUID->"a9dfac27-a9f9-4665-8309-16e2166c789d"],
+
+Cell[BoxData[
+ RowBox[{"Hold", "[", 
+  RowBox[{"Export", "[", 
+   RowBox[{"\<\"C:\\\\Users\\\\danit\\\\Documents\\\\Research\\\\Lie_Anaysis_\
+RMHD-CHM_Eqn\\\\RMHD-CHM-Lie-Analysis\\\\det_eqn\\\\QC-NLSE.csv\"\>", ",", 
+    "zdeterminingequations"}], "]"}], "]"}]], "Output",
+ CellChangeTimes->{
+  3.833559247959981*^9, 3.833559279634592*^9, 3.8335593426057453`*^9, 
+   3.833564924767433*^9, 3.8335649575780225`*^9, 3.8338907037591996`*^9, 
+   3.833891070819497*^9, 3.8338911926562366`*^9, 3.8338912787797675`*^9, {
+   3.833895753644414*^9, 3.833895759041148*^9}},
+ CellLabel->"Out[62]=",ExpressionUUID->"1be3b0d4-7ead-4025-abf2-ca30e95b93cb"]
+}, Open  ]]
+},
+WindowSize->{1423.5, 741.75},
+WindowMargins->{{Automatic, 1152}, {Automatic, 0}},
+TaggingRules->{
+ "WelcomeScreenSettings" -> {"FEStarting" -> False}, "TryRealOnly" -> False},
+Magnification:>1. Inherited,
+FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"cc69addb-ce40-4103-a26c-939ff3777a6d"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 184, 3, 34, "Text",ExpressionUUID->"672c6dea-9177-4046-9d20-467d779b830d"],
+Cell[745, 25, 243, 6, 28, "Input",ExpressionUUID->"addc9a63-fc2c-4cdc-878d-969f18a4d703"],
+Cell[991, 33, 675, 15, 34, "Text",ExpressionUUID->"c52037ec-0337-4eda-ad87-9dabb09dcd3b"],
+Cell[1669, 50, 176, 3, 28, "Input",ExpressionUUID->"c2dce92a-c382-4f17-a4ab-dcb47d10c22d"],
+Cell[1848, 55, 188, 3, 34, "Text",ExpressionUUID->"15219869-0daa-488d-a20a-c5e17d39efec"],
+Cell[2039, 60, 351, 8, 28, "Input",ExpressionUUID->"bfdad67b-e3d7-41f2-a92e-50c9b1804efa"],
+Cell[2393, 70, 186, 3, 34, "Text",ExpressionUUID->"bba78b02-5a6f-473d-9fa9-52136cf286dc"],
+Cell[2582, 75, 358, 8, 28, "Input",ExpressionUUID->"ee4cea9d-c32f-4e30-ab81-0919c535b0b5"],
+Cell[2943, 85, 290, 5, 34, "Text",ExpressionUUID->"cfdadec1-4a78-4954-85c4-4ed3da7e195c"],
+Cell[3236, 92, 413, 10, 28, "Input",ExpressionUUID->"fcf81d8e-b800-4031-8696-1299a49bb668"],
+Cell[3652, 104, 212, 4, 56, "Text",ExpressionUUID->"a3a75e5e-ad79-4e3f-9d20-6fdfd0df48a7"],
+Cell[3867, 110, 216, 5, 28, "Input",ExpressionUUID->"99f94b48-3e32-40e4-9091-44c3aca05cc7"],
+Cell[4086, 117, 443, 7, 56, "Text",ExpressionUUID->"169ed71f-47cd-4061-9079-3683a40f8f38"],
+Cell[4532, 126, 150, 4, 28, "Input",ExpressionUUID->"23c4d2e6-0773-4954-9e26-cf165455deee"],
+Cell[4685, 132, 569, 8, 56, "Text",ExpressionUUID->"3524de00-2451-4774-9ed2-4a8e9987f852"],
+Cell[5257, 142, 154, 4, 28, "Input",ExpressionUUID->"e2497cc9-aff3-4f18-8d99-268c2fa5276c"],
+Cell[5414, 148, 629, 9, 78, "Text",ExpressionUUID->"40026053-4451-469a-9ace-b8eed30471f2"],
+Cell[6046, 159, 162, 4, 28, "Input",ExpressionUUID->"a9966372-0b91-468c-bb1e-6936e878acb7"],
+Cell[6211, 165, 429, 8, 34, "Text",ExpressionUUID->"8382d2ad-e111-4829-8a28-6f33d5890687"],
+Cell[6643, 175, 705, 16, 60, "Input",ExpressionUUID->"e9260a34-73c5-488f-901d-f95aa2d9b210"],
+Cell[7351, 193, 404, 8, 34, "Text",ExpressionUUID->"2830fd9c-a569-444d-8b13-088629257bca"],
+Cell[7758, 203, 699, 13, 44, "Input",ExpressionUUID->"7ed0d7f7-e813-4162-870f-4ad9d05766f8"],
+Cell[8460, 218, 602, 13, 44, "Input",ExpressionUUID->"47f46df6-189c-406e-b7e4-965e2d4fdecf"],
+Cell[9065, 233, 331, 5, 28, "Input",ExpressionUUID->"e3ed7a8c-d5c8-4610-b403-7884652ab008"],
+Cell[CellGroupData[{
+Cell[9421, 242, 277, 7, 60, "Input",ExpressionUUID->"d59b39dd-960a-4569-8d5a-c92ed9e17417"],
+Cell[9701, 251, 597, 12, 22, "Print",ExpressionUUID->"1d3b08b2-e16f-4176-ba14-83f93b4b88b6"]
+}, Open  ]],
+Cell[10313, 266, 110, 0, 34, "Text",ExpressionUUID->"5096cc2c-98fd-479f-8ead-95aff7429b45"],
+Cell[10426, 268, 173, 2, 28, "Input",ExpressionUUID->"b12beb2a-36b3-4e82-a623-08238f8b4714"],
+Cell[10602, 272, 176, 3, 34, "Text",ExpressionUUID->"7d484f0b-af12-4121-91c8-e585951ee762"],
+Cell[CellGroupData[{
+Cell[10803, 279, 273, 6, 60, "Input",ExpressionUUID->"700299b2-8677-4111-aed5-c667bee4d7d7"],
+Cell[11079, 287, 1191, 25, 70, "Output",ExpressionUUID->"92a2992e-26ca-43f9-8e8f-54ef0b7c0d7e"]
+}, Open  ]],
+Cell[12285, 315, 109, 0, 34, "Text",ExpressionUUID->"aac6b9df-513f-4ebc-9810-2d9f023f5b78"],
+Cell[12397, 317, 173, 2, 28, "Input",ExpressionUUID->"b432a29e-8d9d-4bb0-b349-8c2b72e9a8d9"],
+Cell[12573, 321, 165, 3, 34, "Text",ExpressionUUID->"57022606-4ac7-443e-8e96-2ea3a031f9d9"],
+Cell[12741, 326, 199, 3, 28, "Input",ExpressionUUID->"db2ad57c-999e-499c-b5bb-016536704520"],
+Cell[12943, 331, 122, 0, 34, "Text",ExpressionUUID->"9661a693-5b10-4cea-aa43-c03a34b1ff43"],
+Cell[CellGroupData[{
+Cell[13090, 335, 333, 8, 60, "Input",ExpressionUUID->"cd375bd4-b79e-4814-a7dd-6ddb399636ab"],
+Cell[13426, 345, 559, 11, 23, "Message",ExpressionUUID->"53146c22-ba6e-401d-ab07-88dacb942d90"]
+}, Open  ]],
+Cell[14000, 359, 123, 0, 34, "Text",ExpressionUUID->"0c7d63fc-52be-43c7-83e0-ac8aaac2de6f"],
+Cell[CellGroupData[{
+Cell[14148, 363, 250, 4, 28, "Input",ExpressionUUID->"4572b3cb-3747-4762-96a9-9a8100029749"],
+Cell[14401, 369, 557, 11, 23, "Message",ExpressionUUID->"02451e8d-81e9-4c86-befc-e58d3e2830e8"],
+Cell[14961, 382, 483, 8, 32, "Output",ExpressionUUID->"dac724f1-82c4-4454-9263-b5b1ac103906"]
+}, Open  ]],
+Cell[15459, 393, 545, 11, 144, "Text",ExpressionUUID->"610af152-b564-42a8-9ac5-e0575b9d747a"],
+Cell[CellGroupData[{
+Cell[16029, 408, 293, 7, 44, "Input",ExpressionUUID->"1a259947-7457-4268-8069-a9cc2e082939"],
+Cell[16325, 417, 555, 11, 23, "Message",ExpressionUUID->"3a536a6a-b4a3-403f-bf9e-6a2cd63c17fe"],
+Cell[16883, 430, 698, 14, 32, "Output",ExpressionUUID->"17d23365-733f-4f21-9122-3410533ef857"]
+}, Open  ]],
+Cell[17596, 447, 163, 3, 34, "Text",ExpressionUUID->"a9a13f66-b7a2-4579-b09c-08f2b0cd5a42"],
+Cell[CellGroupData[{
+Cell[17784, 454, 140, 2, 28, "Input",ExpressionUUID->"ac639ce3-bfe9-4795-9cf3-39efb6fb8efb"],
+Cell[17927, 458, 408, 6, 32, "Output",ExpressionUUID->"cfd59ffa-235c-4765-b310-1568f209956a"]
+}, Open  ]],
+Cell[18350, 467, 103, 0, 34, "Text",ExpressionUUID->"58820618-ca0a-47b4-ab39-64d4a444a5b0"],
+Cell[CellGroupData[{
+Cell[18478, 471, 140, 2, 28, "Input",ExpressionUUID->"631aa7f3-6d5c-4154-8cb6-b08036e96b5b"],
+Cell[18621, 475, 401, 6, 32, "Output",ExpressionUUID->"c5689ffa-eafb-4a11-a592-3119339c294b"]
+}, Open  ]],
+Cell[19037, 484, 416, 10, 28, "Input",ExpressionUUID->"3d110daa-5680-4518-9830-2493611415fa"],
+Cell[19456, 496, 143, 2, 34, "Text",ExpressionUUID->"529eff04-4568-4a0c-ac10-0e58603dc588"],
+Cell[CellGroupData[{
+Cell[19624, 502, 158, 2, 28, "Input",ExpressionUUID->"799c8795-f081-4c7a-a7a7-34c10092750c"],
+Cell[19785, 506, 444, 7, 32, "Output",ExpressionUUID->"eb44129d-1590-40d4-8cfe-c0de28714ac8"]
+}, Open  ]],
+Cell[20244, 516, 196, 3, 34, "Text",ExpressionUUID->"8c3d31f2-acb8-4ca5-96dc-f97f71ae184f"],
+Cell[CellGroupData[{
+Cell[20465, 523, 388, 6, 28, "Input",ExpressionUUID->"82ff981d-4a1e-4acf-9329-d55ed2c5cfe8"],
+Cell[20856, 531, 559, 11, 23, "Message",ExpressionUUID->"4e6a9fd3-6e01-43ae-81c7-1d3925ca02e2"],
+Cell[21418, 544, 523, 9, 32, "Output",ExpressionUUID->"cdb81d25-fd10-46d5-8a71-69700fd70c4c"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21978, 558, 270, 5, 47, "Input",ExpressionUUID->"0f4b274b-d89c-4a2f-b661-ae34cd171a61"],
+Cell[22251, 565, 407, 9, 32, "Output",ExpressionUUID->"d1fa82a0-b19f-4489-9b33-319696a47193"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22695, 579, 156, 2, 28, "Input",ExpressionUUID->"da1a0dab-8ca8-4459-9472-6d6fd840829c"],
+Cell[22854, 583, 393, 10, 45, "Output",ExpressionUUID->"1f559645-36e8-484e-9f09-9627cf93eb34"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23284, 598, 145, 2, 28, "Input",ExpressionUUID->"b19e7c9c-a392-49fa-b4ff-7f1c5a673a06"],
+Cell[23432, 602, 399, 6, 32, "Output",ExpressionUUID->"42cabfeb-c4aa-48b3-9516-56acb68fe0b4"]
+}, Open  ]],
+Cell[23846, 611, 203, 3, 28, "Input",ExpressionUUID->"a5ac3774-f5a8-4334-b524-c5830c644f66"],
+Cell[CellGroupData[{
+Cell[24074, 618, 692, 11, 28, "Input",ExpressionUUID->"6b4b4a9a-3753-45ed-913c-c15b61b79b17"],
+Cell[24769, 631, 557, 11, 23, "Message",ExpressionUUID->"a9dfac27-a9f9-4665-8309-16e2166c789d"],
+Cell[25329, 644, 641, 11, 32, "Output",ExpressionUUID->"1be3b0d4-7ead-4025-abf2-ca30e95b93cb"]
+}, Open  ]]
+}
+]
+*)
+

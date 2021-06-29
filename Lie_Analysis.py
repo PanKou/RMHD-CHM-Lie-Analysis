@@ -93,9 +93,8 @@ def get_symbolic_terms(eqn, var_dict, var_list, constants):
        eqn (list): list of dictionaries 
     """
     sym_cte_list = []
-    var_list
     for idx in range(len(var_list)):
-        sym_cte_list.append(symbols(var_list[idx]))
+        sym_cte_list.append(symbols(var_list[idx] + str(idx)))
     for idx in range(len(constants) - len(var_list)):
         sym_cte_list.append(symbols('alpha_' + str(idx)))
     A = 0 
