@@ -1,0 +1,3464 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    191017,       3456]
+NotebookOptionsPosition[    182022,       3319]
+NotebookOutlinePosition[    182558,       3338]
+CellTagsIndexPosition[    182515,       3335]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Clear all symbols in the current context.", "Text",
+ CellChangeTimes->{{3.4715644485587473`*^9, 
+  3.47156448605101*^9}},ExpressionUUID->"672c6dea-9177-4046-9d20-\
+467d779b830d"],
+
+Cell[BoxData[
+ RowBox[{"ClearAll", "[", 
+  RowBox[{"Evaluate", "[", 
+   RowBox[{
+    RowBox[{"Context", "[", "]"}], "<>", "\"\<*\>\""}], "]"}], "]"}]], "Input",
+ CellLabel->
+  "In[128]:=",ExpressionUUID->"addc9a63-fc2c-4cdc-878d-969f18a4d703"],
+
+Cell[TextData[{
+ StyleBox["First read in the package which is located in User Home \
+Folder/Library/",
+  FontWeight->"Plain"],
+ StyleBox["Mathematica",
+  FontWeight->"Plain",
+  FontSlant->"Italic"],
+ StyleBox["/Applications/SymmetryAnalysis. (Download this from Cantwell\
+\[CloseCurlyQuote]s site, package required for Lie analysis)",
+  FontWeight->"Plain"]
+}], "Text",
+ CellChangeTimes->{{3.472046215957556*^9, 3.472046255573135*^9}, {
+  3.472046289795615*^9, 3.472046308115048*^9}, {3.4720466725423717`*^9, 
+  3.472046673357225*^9}, {3.8322133109680367`*^9, 3.8322133349153824`*^9}},
+ ImageRegion->{{0, 1}, {0, 
+  1}},ExpressionUUID->"c52037ec-0337-4eda-ad87-9dabb09dcd3b"],
+
+Cell["Needs[\"SymmetryAnalysis`IntroToSymmetry`\"]", "Input",
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->
+  "In[129]:=",ExpressionUUID->"c2dce92a-c382-4f17-a4ab-dcb47d10c22d"],
+
+Cell[TextData[StyleBox["Enter the list of independent variables.",
+ FontWeight->"Plain"]], "Text",
+ ImageRegion->{{0, 1}, {0, 
+  1}},ExpressionUUID->"15219869-0daa-488d-a20a-c5e17d39efec"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"independentvariables", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<x\>\"", ",", "\"\<y\>\"", ",", " ", "\"\<z\>\"", ",", " ", 
+     "\"\<t\>\"", ",", " ", "\"\<\[Tau]\>\""}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.832212519159512*^9, 3.832212528253248*^9}},
+ CellLabel->
+  "In[130]:=",ExpressionUUID->"bfdad67b-e3d7-41f2-a92e-50c9b1804efa"],
+
+Cell[TextData[StyleBox["Enter the list of dependent variables.",
+ FontWeight->"Plain"]], "Text",
+ ImageRegion->{{0, 1}, {0, 
+  1}},ExpressionUUID->"bba78b02-5a6f-473d-9fa9-52136cf286dc"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"dependentvariables", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<\[Phi]\>\"", ",", "\"\<\[Psi]\>\""}], "}"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.8322125361281815`*^9, 3.8322125649562736`*^9}, {
+  3.834523526091672*^9, 3.8345235266113386`*^9}},
+ CellLabel->
+  "In[131]:=",ExpressionUUID->"ee4cea9d-c32f-4e30-ab81-0919c535b0b5"],
+
+Cell[TextData[StyleBox["Enter the list of function and/or constant names that \
+need to be preserved when the equations are expressed in terms of generic \
+variables.",
+ FontWeight->"Plain"]], "Text",
+ ImageRegion->{{0, 1}, {0, 
+  1}},ExpressionUUID->"cfdadec1-4a78-4954-85c4-4ed3da7e195c"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"frozennames", "=", 
+   RowBox[{"{", 
+    RowBox[{"\"\<\[Alpha]\>\"", ",", "\"\<\[Eta]\>\""}], "}"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.832212559299383*^9, 3.8322125710402627`*^9}},
+ CellLabel->
+  "In[132]:=",ExpressionUUID->"fcf81d8e-b800-4031-8696-1299a49bb668"],
+
+Cell[TextData[StyleBox["Enter the maximum derivative order of the \ninput \
+equation(s).",
+ FontWeight->"Plain"]], "Text",
+ ImageRegion->{{0, 1}, {0, 
+  1}},ExpressionUUID->"a3a75e5e-ad79-4e3f-9d20-6fdfd0df48a7"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"p", "=", "3"}], ";"}]], "Input",
+ CellChangeTimes->{{3.832212582326071*^9, 3.832212582422094*^9}},
+ CellLabel->
+  "In[133]:=",ExpressionUUID->"99f94b48-3e32-40e4-9091-44c3aca05cc7"],
+
+Cell[TextData[StyleBox["The maximum derivative order that the infinitesimals \
+are assumed to depend on is specified by the input parameter r. This \
+parameter is only nonzero when the user is looking for Lie contact groups or \
+Lie-Backlund groups. For the usual case where one is searching for point \
+groups set r=0.",
+ FontWeight->"Plain"]], "Text",
+ ImageRegion->{{0, 1}, {0, 
+  1}},ExpressionUUID->"169ed71f-47cd-4061-9079-3683a40f8f38"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"r", "=", "0"}], ";"}]], "Input",
+ CellLabel->
+  "In[134]:=",ExpressionUUID->"23c4d2e6-0773-4954-9e26-cf165455deee"],
+
+Cell[TextData[StyleBox["When searching for Lie-Backlund groups ie. r=1 or \
+greater one can, without loss of generality, leave the independent variables \
+untransformed. The corresponding infinitesimals (the xse's) are set to zero \
+by setting xseon=0. If one is searching for point groups then set xseon=1. \
+The choice xseon=1 is also an option when looking for Lie-Backlund groups and \
+this can be useful when looking for contact symmetries.",
+ FontWeight->"Plain"]], "Text",
+ ImageRegion->{{0, 1}, {0, 
+  1}},ExpressionUUID->"3524de00-2451-4774-9ed2-4a8e9987f852"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"xseon", "=", "1"}], ";"}]], "Input",
+ CellLabel->
+  "In[135]:=",ExpressionUUID->"e2497cc9-aff3-4f18-8d99-268c2fa5276c"],
+
+Cell[TextData[StyleBox["When searching for Lie-Backlund groups it is \
+necessary to differentiate the input equations with respect to all \
+independent variables producing derivatives of order p+r. \nThese higher \
+order differential consequences are appended to the set of rules applied to \
+the invariance condition. This process is carried out automatically when \
+internalrules=1. For point groups the equation or equation system is the only \
+rule or set of rules needed and one sets internalrules=0.",
+ FontWeight->"Plain"]], "Text",
+ ImageRegion->{{0, 1}, {0, 
+  1}},ExpressionUUID->"40026053-4451-469a-9ace-b8eed30471f2"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"internalrules", "=", "0"}], ";"}]], "Input",
+ CellLabel->
+  "In[136]:=",ExpressionUUID->"a9966372-0b91-468c-bb1e-6936e878acb7"],
+
+Cell["\<\
+Construct the array of rules to be applied to the invariance condition. Get \
+these from your equations. I recommend trivially solving for your first term. \
+Parentheses okay to use\
+\>", "Text",
+ CellChangeTimes->{{3.832212795352461*^9, 3.83221279944093*^9}, {
+  3.832212984423888*^9, 3.8322129997465935`*^9}, {3.832213420461437*^9, 
+  3.8322134260227823`*^9}},ExpressionUUID->"8382d2ad-e111-4829-8a28-\
+6f33d5890687"],
+
+Cell["\<\
+rulesarray=
+{\"D[\[Phi][x, y, z, t, \[Tau]],x,x,t]-> -D[\[Phi][x, y, z, t, \[Tau]],y,y,t] \
+-D[\[Phi][x, y, z, t, \[Tau]],x]*(D[\[Phi][x, y, z, t, \
+\[Tau]],x,x,y]+D[\[Phi][x, y, z, t, \[Tau]],y,y,y]) +D[\[Phi][x, y, z, t, \
+\[Tau]],y]*(D[\[Phi][x, y, z, t, \[Tau]],x,x,x]+D[\[Phi][x, y, z, t, \
+\[Tau]],y,y,x]) -D[\[Psi][x, y, z, t, \[Tau]],x,x,z] -D[\[Psi][x, y, z, t, \
+\[Tau]],y,y,z] +D[\[Psi][x, y, z, t, \[Tau]],x]*(D[\[Psi][x, y, z, t, \
+\[Tau]],x,x,y]+D[\[Psi][x, y, z, t, \[Tau]],y,y,y]) -D[\[Psi][x, y, z, t, \
+\[Tau]],y]*(D[\[Psi][x, y, z, t, \[Tau]],x,x,x]+D[\[Psi][x, y, z, t, \
+\[Tau]],y,y,x])\"};\
+\>", "Input",
+ CellChangeTimes->{{3.832213003978619*^9, 3.832213107687207*^9}, {
+   3.832213473468642*^9, 3.8322136964799805`*^9}, {3.8322140334803133`*^9, 
+   3.8322140743415956`*^9}, {3.8322145404546733`*^9, 
+   3.8322145970452394`*^9}, {3.833897645394206*^9, 3.833897663940894*^9}, {
+   3.8338977548869863`*^9, 3.8338977879092865`*^9}, {3.8338978540582333`*^9, 
+   3.8338978923182178`*^9}, 3.8338983227020736`*^9, {3.8338984558310423`*^9, 
+   3.8338984649815702`*^9}, {3.833899225121375*^9, 3.8338992564148216`*^9}, {
+   3.8339028212337227`*^9, 3.8339028275841208`*^9}, {3.833908319212756*^9, 
+   3.8339083444529734`*^9}, 3.8345131949304433`*^9, {3.834513297361479*^9, 
+   3.8345133435856004`*^9}, {3.8345134285785065`*^9, 
+   3.8345135332899384`*^9}, {3.8345135661880803`*^9, 3.834513741750559*^9}, {
+   3.834521752406187*^9, 3.8345217810515685`*^9}, {3.8345234750181227`*^9, 
+   3.8345234762602224`*^9}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->
+  "In[137]:=",ExpressionUUID->"e9260a34-73c5-488f-901d-f95aa2d9b210"],
+
+Cell["\<\
+Input your equations as strings, the LHS or RHS when the other is 0: \
+Parentheses okay to use\
+\>", "Text",
+ CellChangeTimes->{{3.8322127205026646`*^9, 3.8322127242710915`*^9}, {
+  3.8322127599727497`*^9, 3.8322127705018253`*^9}, {3.8322128262199693`*^9, 
+  3.8322128347330093`*^9}, {3.8322134163729324`*^9, 
+  3.8322134300392694`*^9}},ExpressionUUID->"2830fd9c-a569-444d-8b13-\
+088629257bca"],
+
+Cell["\<\
+inputequation1=
+\"D[\[Phi][x, y, z, t, \[Tau]],x,x,t] +D[\[Phi][x, y, z, t, \[Tau]],y,y,t] \
++D[\[Phi][x, y, z, t, \[Tau]],x]*(D[\[Phi][x, y, z, t, \
+\[Tau]],x,x,y]+D[\[Phi][x, y, z, t, \[Tau]],y,y,y]) -D[\[Phi][x, y, z, t, \
+\[Tau]],y]*(D[\[Phi][x, y, z, t, \[Tau]],x,x,x]+D[\[Phi][x, y, z, t, \
+\[Tau]],y,y,x]) +D[\[Psi][x, y, z, t, \[Tau]],x,x,z] +D[\[Psi][x, y, z, t, \
+\[Tau]],y,y,z] -D[\[Psi][x, y, z, t, \[Tau]],x]*(D[\[Psi][x, y, z, t, \
+\[Tau]],x,x,y]+D[\[Psi][x, y, z, t, \[Tau]],y,y,y]) +D[\[Psi][x, y, z, t, \
+\[Tau]],y]*(D[\[Psi][x, y, z, t, \[Tau]],x,x,x]+D[\[Psi][x, y, z, t, \
+\[Tau]],y,y,x])\";\
+\>", "Input",
+ CellChangeTimes->{{3.8322127567074633`*^9, 3.8322127752059884`*^9}, {
+  3.832212854687887*^9, 3.8322129558039045`*^9}, {3.8322143567998133`*^9, 
+  3.8322145162914*^9}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->
+  "In[138]:=",ExpressionUUID->"7ed0d7f7-e813-4162-870f-4ad9d05766f8"],
+
+Cell["", "Input",
+ CellChangeTimes->{
+  3.832213352045519*^9, {3.8322138336398973`*^9, 3.8322140057736807`*^9}, {
+   3.834523485700535*^9, 3.834523498701226*^9}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->
+  "In[139]:=",ExpressionUUID->"47f46df6-189c-406e-b7e4-965e2d4fdecf"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.8322127159200573`*^9, 3.8322127344495573`*^9}, 
+   3.832213354005495*^9, {3.832213756816433*^9, 3.8322138115026073`*^9}, {
+   3.8345235545977335`*^9, 3.8345235572782545`*^9}},
+ CellLabel->
+  "In[140]:=",ExpressionUUID->"e3ed7a8c-d5c8-4610-b403-7884652ab008"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Timing[FindDeterminingEquations[
+independentvariables,dependentvariables,frozennames,p,r,xseon,
+inputequation1,rulesarray,internalrules]]\
+\>", "Input",
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->
+  "In[141]:=",ExpressionUUID->"d59b39dd-960a-4569-8d5a-c92ed9e17417"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox["\<\"The function FindDetermining Equations has begun, the \
+memory in use = \\!\\(\\*RowBox[{\\\"106588936\\\"}]\\), the time used = \
+\\!\\(\\*RowBox[{\\\"0.577`\\\"}]\\)\"\>",
+  StringForm[
+  "The function FindDetermining Equations has begun, the memory in use = ``, \
+the time used = ``", 106588936, 0.577],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8339239430479584`*^9, 3.834521535329177*^9, 
+  3.8345218662660756`*^9, 3.8345243504491997`*^9},
+ CellLabel->
+  "During evaluation of \
+In[141]:=",ExpressionUUID->"71b0d947-72e0-4a00-9f68-7de7bb8236de"],
+
+Cell[BoxData["\<\"The function FindDeterminingEquations is nearly complete. \
+The invariance condition has been created with all rules applied. The final \
+step in the generation of the determining equations is to sum together terms \
+in the table of invariance condition terms (called infinitesimaltable) that \
+are multiplied by the same combination of products of free y derivatives. The \
+result is the table infinitesimaltablesums corresponding to matching \
+y-derivative expressions. If the invariance condition is long as it often is \
+this process could take a long time since it requires sorting through the \
+table infinitesimaltable once for each possible combination of y derivative \
+products. This is the rate limiting step in the function \
+FindDeterminingEquations.Virtually all other steps are quite fast including \
+the generation of the extended derivatives of the infinitesimals.\"\>"], \
+"Print",
+ CellChangeTimes->{3.8339239430479584`*^9, 3.834521535329177*^9, 
+  3.8345218662660756`*^9, 3.834524359427186*^9},
+ CellLabel->
+  "During evaluation of \
+In[141]:=",ExpressionUUID->"c9c30c31-d29d-410e-aa37-397021d94974"],
+
+Cell[BoxData[
+ InterpretationBox["\<\"The determining equations have been expressed in \
+terms of z-variables, the length of zdeterminingequations = \\!\\(\\*RowBox[{\
+\\\"869\\\"}]\\), the byte count of zdeterminingequations = \\!\\(\\*RowBox[{\
+\\\"151264\\\"}]\\), the memory in use = \\!\\(\\*RowBox[{\\\"159448696\\\"}]\
+\\), the time used = \\!\\(\\*RowBox[{\\\"9.577`\\\"}]\\)\"\>",
+  StringForm[
+  "The determining equations have been expressed in terms of z-variables, the \
+length of zdeterminingequations = ``, the byte count of zdeterminingequations \
+= ``, the memory in use = ``, the time used = ``", 869, 151264, 159448696, 
+   9.577],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8339239430479584`*^9, 3.834521535329177*^9, 
+  3.8345218662660756`*^9, 3.83452435952293*^9},
+ CellLabel->
+  "During evaluation of \
+In[141]:=",ExpressionUUID->"eba9ca96-e94f-4ff9-a548-6b8ff55cdba2"],
+
+Cell[BoxData[
+ InterpretationBox["\<\"FindDeterminingEquations is done. The memory in use = \
+\\!\\(\\*RowBox[{\\\"159451232\\\"}]\\), the time used = \
+\\!\\(\\*RowBox[{\\\"9.577`\\\"}]\\)\"\>",
+  StringForm[
+  "FindDeterminingEquations is done. The memory in use = ``, the time used = \
+``", 159451232, 9.577],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.8339239430479584`*^9, 3.834521535329177*^9, 
+  3.8345218662660756`*^9, 3.8345243595249257`*^9},
+ CellLabel->
+  "During evaluation of \
+In[141]:=",ExpressionUUID->"a1ad99f8-d8e2-4116-9ddc-a2b1b722eb53"],
+
+Cell[BoxData["\<\"FindDeterminingEquations has finished executing. You can \
+look at the output in the table zdeterminingequations. Each entry in this \
+table is a determining equation in string format expressed in terms of \
+z-variables. Rules for converting between z-variables and conventional \
+variables are contained in the table ztableofrules. To view the determining \
+equations in terms of conventional variables use the command \
+ToExpression[zdeterminingequations]/.ztableofrules. There are two other items \
+the user may wish to look at; the equation converted to generic \
+(x1,x2,...,y1,y2,...) variables is designated equationgenericvariables and \
+the various derivatives of the equation that appear in the invariance \
+condition can be viewed in the table invarconditiontable. Rules for \
+converting between z-variables and generic variables are contained in the \
+table ztableofrulesxy.\"\>"], "Print",
+ CellChangeTimes->{3.8339239430479584`*^9, 3.834521535329177*^9, 
+  3.8345218662660756`*^9, 3.8345243595957355`*^9},
+ CellLabel->
+  "During evaluation of \
+In[141]:=",ExpressionUUID->"f6e5867f-917d-4f2d-aa46-a319d7739849"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"9.015625`", ",", "Null"}], "}"}]], "Output",
+ CellChangeTimes->{3.834521904419878*^9, 3.834524359600848*^9},
+ CellLabel->
+  "Out[141]=",ExpressionUUID->"12d2eff3-db80-4843-bad0-505e0048b230"]
+}, Open  ]],
+
+Cell["The determining equations of equation1.", "Text",ExpressionUUID->"5096cc2c-98fd-479f-8ead-95aff7429b45"],
+
+Cell["zdeterminingequations1=zdeterminingequations;", "Input",
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->
+  "In[142]:=",ExpressionUUID->"b12beb2a-36b3-4e82-a623-08238f8b4714"],
+
+Cell["", "Text",
+ CellChangeTimes->{
+  3.8345236152766013`*^9},ExpressionUUID->"7d484f0b-af12-4121-91c8-\
+e585951ee762"],
+
+Cell[CellGroupData[{
+
+Cell["", "Input",
+ CellChangeTimes->{3.8345235809056964`*^9},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->
+  "In[143]:=",ExpressionUUID->"700299b2-8677-4111-aed5-c667bee4d7d7"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[""], "Print",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{3.833923977956647*^9, 3.8345219044749265`*^9, 
+  3.8345236120147448`*^9},ExpressionUUID->"09d6effa-29ce-4121-8ba2-\
+30eda942568e"],
+
+Cell[BoxData[""], "Print",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{3.833923977956647*^9, 3.834521905671775*^9, 
+  3.834523608296172*^9},ExpressionUUID->"3b3aa681-61c6-46dd-88c5-\
+fff8dcc8ff9b"],
+
+Cell[BoxData[""], "Print",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{3.833923977956647*^9, 3.834521905733609*^9, 
+  3.8345236050516148`*^9},ExpressionUUID->"be03ed13-d25e-4492-9de5-\
+38efd8726a9c"],
+
+Cell[BoxData[""], "Print",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{3.833923977956647*^9, 3.8345219057387476`*^9, 
+  3.8345235917832875`*^9},ExpressionUUID->"c6e910d2-b2d6-4bf0-a1c4-\
+b47ef91f3a8b"],
+
+Cell[BoxData[""], "Print",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{3.833923977956647*^9, 3.8345219057407446`*^9, 
+  3.834523588334852*^9},ExpressionUUID->"65f80321-746b-45e2-ac0d-\
+0ab12f6f6fab"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1.25`", ",", "Null"}], "}"}]], "Output",
+ CellChangeTimes->{3.4694730152358913`*^9, 3.471566767708144*^9, 
+  3.483748214537696*^9, 3.8322147838042088`*^9, 3.8335590372576847`*^9, 
+  3.8338979023434286`*^9, 3.8339083738105154`*^9, 3.833923979626133*^9, 
+  3.8345219057421293`*^9},
+ CellLabel->
+  "Out[143]=",ExpressionUUID->"870edb5f-df39-4810-a85a-dd4180b1ca7a"]
+}, Open  ]],
+
+Cell["", "Text",
+ CellChangeTimes->{
+  3.8345236233396873`*^9},ExpressionUUID->"aac6b9df-513f-4ebc-9810-\
+2d9f023f5b78"],
+
+Cell["", "Input",
+ CellChangeTimes->{3.8345236201565523`*^9},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->
+  "In[144]:=",ExpressionUUID->"b432a29e-8d9d-4bb0-b349-8c2b72e9a8d9"],
+
+Cell["Repeat for equation3 ", "Text",
+ CellChangeTimes->{{3.8322146623755007`*^9, 
+  3.832214674657499*^9}},ExpressionUUID->"57022606-4ac7-443e-8e96-\
+2ea3a031f9d9"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.832214677135599*^9, 3.8322146887608924`*^9}, {
+  3.8345238985359807`*^9, 3.8345238987754664`*^9}},
+ CellLabel->
+  "In[145]:=",ExpressionUUID->"db2ad57c-999e-499c-b5bb-016536704520"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[""], "Print",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{3.833923979665289*^9, 3.8345219057913356`*^9, 
+  3.8345239184471703`*^9},ExpressionUUID->"f235b187-2b86-4fda-81ac-\
+c38dc1dae60f"],
+
+Cell[BoxData[""], "Print",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{3.833923979665289*^9, 3.8345219222024407`*^9, 
+  3.8345239154753246`*^9},ExpressionUUID->"c5a28456-17f5-4ba3-9f6f-\
+ecc797c8a28e"],
+
+Cell[BoxData[""], "Print",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{3.833923979665289*^9, 3.8345219224308305`*^9, 
+  3.8345239115989604`*^9},ExpressionUUID->"b3673a15-2caa-4670-ba10-\
+df0f9592e928"],
+
+Cell[BoxData[""], "Print",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{3.833923979665289*^9, 3.834521922432824*^9, 
+  3.834523907789214*^9},ExpressionUUID->"b3b965dd-3f65-4b4f-9cd2-\
+c41adf54216c"],
+
+Cell[BoxData[""], "Print",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{3.833923979665289*^9, 3.834521922483569*^9, 
+  3.8345239035189047`*^9},ExpressionUUID->"f5807a35-7a28-43f0-8f52-\
+f47cba37344e"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"16.5`", ",", "Null"}], "}"}]], "Output",
+ CellChangeTimes->{3.832214815052004*^9, 3.8335590638404813`*^9, 
+  3.833897902362257*^9, 3.833908373833453*^9, 3.8339239968962083`*^9, 
+  3.8345219224845667`*^9},
+ CellLabel->
+  "Out[145]=",ExpressionUUID->"64e8dab2-5de5-4367-9a6f-6b64c0a3a03a"]
+}, Open  ]],
+
+Cell["", "Text",
+ CellChangeTimes->{
+  3.8345239224173794`*^9},ExpressionUUID->"9661a693-5b10-4cea-aa43-\
+c03a34b1ff43"],
+
+Cell["", "Input",
+ CellChangeTimes->{{3.8322147026252456`*^9, 3.8322147082981405`*^9}, 
+   3.834523925649832*^9},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->
+  "In[146]:=",ExpressionUUID->"cd375bd4-b79e-4814-a7dd-6ddb399636ab"],
+
+Cell["How many determining equations are there altogether?", "Text",ExpressionUUID->"0c7d63fc-52be-43c7-83e0-ac8aaac2de6f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "[", "zdeterminingequations1", "]"}]], "Input",
+ CellChangeTimes->{{3.832214711179323*^9, 3.832214711227334*^9}, {
+  3.834523937345276*^9, 3.8345239374901557`*^9}},
+ CellLabel->
+  "In[147]:=",ExpressionUUID->"4572b3cb-3747-4762-96a9-9a8100029749"],
+
+Cell[BoxData["869"], "Output",
+ CellChangeTimes->{3.469473015346386*^9, 3.471566767812215*^9, 
+  3.4837482146138477`*^9, 3.8322148151845417`*^9, 3.8335590639450827`*^9, 
+  3.833897902386322*^9, 3.8339083738543973`*^9, 3.833923996942412*^9, 
+  3.83452192252377*^9, 3.8345243596647663`*^9},
+ CellLabel->
+  "Out[147]=",ExpressionUUID->"ca73f228-3889-49bb-abff-0ef660f57fa8"]
+}, Open  ]],
+
+Cell["\<\
+Now solve the determining equations in terms of multivariable polynomials. \
+The Mathematica function Solve uses Gaussian elimination to solve a large \
+number of linear equations for the polynomial coefficients. The time roughly \
+follows
+
+time/timeref=((number of equations)/(number of equationsref))^n
+
+where the exponent is between 2.4 and 2.7. The Mathematica  function Timing \
+outputs the time required for the SolveDeterminingEquations function to \
+execute.\
+\>", "Text",ExpressionUUID->"610af152-b564-42a8-9ac5-e0575b9d747a"],
+
+Cell["", "Input",
+ CellChangeTimes->{3.8345239802195177`*^9},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->
+  "In[148]:=",ExpressionUUID->"1a259947-7457-4268-8069-a9cc2e082939"],
+
+Cell["\<\
+Here are the infinitesimal transformation functions for the independent \
+variables.\
+\>", "Text",ExpressionUUID->"a9a13f66-b7a2-4579-b09c-08f2b0cd5a42"],
+
+Cell[CellGroupData[{
+
+Cell["xsefunctions", "Input",
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->
+  "In[149]:=",ExpressionUUID->"ac639ce3-bfe9-4795-9cf3-39efb6fb8efb"],
+
+Cell[BoxData["xsefunctions"], "Output",
+ CellChangeTimes->{3.4694730156648207`*^9, 3.4715667684469643`*^9, 
+  3.483748214868608*^9, 3.8322148269835596`*^9, 3.833559077434944*^9, 
+  3.833897902419712*^9, 3.8339083738793316`*^9, 3.8339240080388594`*^9, 
+  3.8345219346245193`*^9, 3.8345243596833487`*^9},
+ CellLabel->
+  "Out[149]=",ExpressionUUID->"0e5aa3dd-6fed-49af-b234-2e9143977a9c"]
+}, Open  ]],
+
+Cell["and for the dependent variables.", "Text",ExpressionUUID->"58820618-ca0a-47b4-ab39-64d4a444a5b0"],
+
+Cell[CellGroupData[{
+
+Cell["etafunctions", "Input",
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->
+  "In[150]:=",ExpressionUUID->"631aa7f3-6d5c-4154-8cb6-b08036e96b5b"],
+
+Cell[BoxData["etafunctions"], "Output",
+ CellChangeTimes->{3.4694730157039137`*^9, 3.471566768497814*^9, 
+  3.483748214997417*^9, 3.8322148270150747`*^9, 3.83355907754191*^9, 
+  3.8338979024482985`*^9, 3.8339083738913035`*^9, 3.8339240080708156`*^9, 
+  3.834521934685665*^9, 3.8345243596949725`*^9},
+ CellLabel->
+  "Out[150]=",ExpressionUUID->"edca2a1b-ec7f-4803-b901-9d286f33fe82"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"infinitesimalgroupsxy", "=", 
+   RowBox[{"infinitesimalgroups", "/.", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"z1", "\[Rule]", "x"}], ",", 
+      RowBox[{"z2", "\[Rule]", "t"}], ",", 
+      RowBox[{"z3", "\[Rule]", "u"}], ",", 
+      RowBox[{"z4", "\[Rule]", "v"}]}], "}"}]}]}], ";"}]], "Input",
+ CellLabel->
+  "In[151]:=",ExpressionUUID->"3d110daa-5680-4518-9830-2493611415fa"],
+
+Cell["\<\
+Check the groups. xse's are on the left, eta's are on the right.\
+\>", "Text",ExpressionUUID->"529eff04-4568-4a0c-ac10-0e58603dc588"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Column", "[", "infinitesimalgroupsxy", "]"}]], "Input",
+ CellLabel->
+  "In[152]:=",ExpressionUUID->"799c8795-f081-4c7a-a7a7-34c10092750c"],
+
+Cell[BoxData[
+ RowBox[{"Column", "[", "infinitesimalgroups", "]"}]], "Output",
+ CellChangeTimes->{3.4694730157818623`*^9, 3.47156676859687*^9, 
+  3.483748215047871*^9, 3.832214827117111*^9, 3.8335590776896105`*^9, 
+  3.833897902489463*^9, 3.833908373907256*^9, 3.833924008137639*^9, 
+  3.834521934796239*^9, 3.834524359714757*^9},
+ CellLabel->
+  "Out[152]=",ExpressionUUID->"21015219-b442-4e54-ac1e-36688791763d"]
+}, Open  ]],
+
+Cell["Check the infinitesimals in the determining equations.", "Text",
+ CellChangeTimes->{{3.471145395559845*^9, 
+  3.471145429404257*^9}},ExpressionUUID->"8c3d31f2-acb8-4ca5-96dc-\
+f97f71ae184f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Simplify", "[", 
+  RowBox[{"ToExpression", "[", "zdeterminingequations", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.471145481019026*^9, 3.4711455173104143`*^9}, 
+   3.471146122753789*^9, {3.47154140257237*^9, 3.471541418863482*^9}, {
+   3.4715667761993*^9, 3.4715667786858253`*^9}},
+ CellLabel->
+  "In[153]:=",ExpressionUUID->"82ff981d-4a1e-4acf-9329-d55ed2c5cfe8"],
+
+Cell[BoxData[
+ InterpretationBox[
+  TagBox[
+   FrameBox[GridBox[{
+      {
+       ItemBox[
+        TagBox[
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             SuperscriptBox["xse1", 
+              TagBox[
+               RowBox[{"(", 
+                RowBox[{
+                "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+                 "1"}], ")"}],
+               Derivative],
+              MultilineFunction->None], "[", 
+             RowBox[{
+             "z1", ",", "z2", ",", "z3", ",", "z4", ",", "z5", ",", "z6", ",",
+               "z7"}], "]"}], "\[Equal]", "0"}], ",", 
+           RowBox[{
+            RowBox[{
+             SuperscriptBox["xse1", 
+              TagBox[
+               RowBox[{"(", 
+                RowBox[{
+                "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+                 "1"}], ")"}],
+               Derivative],
+              MultilineFunction->None], "[", 
+             RowBox[{
+             "z1", ",", "z2", ",", "z3", ",", "z4", ",", "z5", ",", "z6", ",",
+               "z7"}], "]"}], "\[Equal]", "0"}], ",", 
+           TemplateBox[{"865"},
+            "OutputSizeLimit`Skeleton"], ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"2", " ", 
+              RowBox[{
+               SuperscriptBox["xse5", 
+                TagBox[
+                 RowBox[{"(", 
+                  RowBox[{
+                  "0", ",", "1", ",", "1", ",", "0", ",", "0", ",", "0", ",", 
+                   "1"}], ")"}],
+                 Derivative],
+                MultilineFunction->None], "[", 
+               RowBox[{
+               "z1", ",", "z2", ",", "z3", ",", "z4", ",", "z5", ",", "z6", 
+                ",", "z7"}], "]"}]}], "+", 
+             RowBox[{
+              SuperscriptBox["xse5", 
+               TagBox[
+                RowBox[{"(", 
+                 RowBox[{
+                 "1", ",", "2", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+                  "0"}], ")"}],
+                Derivative],
+               MultilineFunction->None], "[", 
+              RowBox[{
+              "z1", ",", "z2", ",", "z3", ",", "z4", ",", "z5", ",", "z6", 
+               ",", "z7"}], "]"}], "+", 
+             RowBox[{
+              SuperscriptBox["xse5", 
+               TagBox[
+                RowBox[{"(", 
+                 RowBox[{
+                 "3", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+                  "0"}], ")"}],
+                Derivative],
+               MultilineFunction->None], "[", 
+              RowBox[{
+              "z1", ",", "z2", ",", "z3", ",", "z4", ",", "z5", ",", "z6", 
+               ",", "z7"}], "]"}]}], "\[Equal]", "0"}], ",", 
+           RowBox[{
+            RowBox[{"2", " ", 
+             RowBox[{
+              SuperscriptBox["xse5", 
+               TagBox[
+                RowBox[{"(", 
+                 RowBox[{
+                 "0", ",", "1", ",", "0", ",", "1", ",", "0", ",", "1", ",", 
+                  "0"}], ")"}],
+                Derivative],
+               MultilineFunction->None], "[", 
+              RowBox[{
+              "z1", ",", "z2", ",", "z3", ",", "z4", ",", "z5", ",", "z6", 
+               ",", "z7"}], "]"}]}], "\[Equal]", 
+            RowBox[{
+             RowBox[{
+              SuperscriptBox["xse5", 
+               TagBox[
+                RowBox[{"(", 
+                 RowBox[{
+                 "1", ",", "2", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+                  "0"}], ")"}],
+                Derivative],
+               MultilineFunction->None], "[", 
+              RowBox[{
+              "z1", ",", "z2", ",", "z3", ",", "z4", ",", "z5", ",", "z6", 
+               ",", "z7"}], "]"}], "+", 
+             RowBox[{
+              SuperscriptBox["xse5", 
+               TagBox[
+                RowBox[{"(", 
+                 RowBox[{
+                 "3", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+                  "0"}], ")"}],
+                Derivative],
+               MultilineFunction->None], "[", 
+              RowBox[{
+              "z1", ",", "z2", ",", "z3", ",", "z4", ",", "z5", ",", "z6", 
+               ",", "z7"}], "]"}]}]}]}], "}"}],
+         Short[#, 5]& ],
+        BaseStyle->{Deployed -> False},
+        StripOnInput->False]},
+      {GridBox[{
+         {
+          PaneBox[
+           TagBox[
+            TooltipBox[
+             StyleBox[
+              StyleBox[
+               DynamicBox[ToBoxes[
+                 FEPrivate`FrontEndResource[
+                 "FEStrings", "sizeBriefExplanation"], StandardForm],
+                ImageSizeCache->{49.2, {2., 7.}}],
+               StripOnInput->False,
+               DynamicUpdating->True,
+               LineSpacing->{1, 2},
+               LineIndent->0,
+               LinebreakAdjustments->{1., 100, 0, 0, 0}], "OSLText",
+              StripOnInput->False],
+             StyleBox[
+              DynamicBox[
+               ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeExplanation"], 
+                StandardForm]], DynamicUpdating -> True, LineIndent -> 0, 
+              LinebreakAdjustments -> {1., 100, 0, 0, 0}, 
+              LineSpacing -> {1, 2}, StripOnInput -> False]],
+            Annotation[#, 
+             Style[
+              Dynamic[
+               FEPrivate`FrontEndResource["FEStrings", "sizeExplanation"]], 
+              DynamicUpdating -> True, LineIndent -> 0, 
+              LinebreakAdjustments -> {1., 100, 0, 0, 0}, 
+              LineSpacing -> {1, 2}], "Tooltip"]& ],
+           Alignment->Center,
+           BaselinePosition->Baseline,
+           ImageSize->{Automatic, {25, Full}}], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowLess"], 
+                StandardForm],
+               ImageSizeCache->{39.6, {1., 7.}}],
+              StripOnInput->False,
+              DynamicUpdating->True,
+              LineSpacing->{1, 2},
+              LineIndent->0,
+              LinebreakAdjustments->{1., 100, 0, 0, 0}], "OSLControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowLess"], 
+                StandardForm]],
+              StripOnInput->False,
+              DynamicUpdating->True,
+              LineSpacing->{1, 2},
+              LineIndent->0,
+              LinebreakAdjustments->{1., 100, 0, 0, 0}], "OSLControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, {25, Full}}],
+           Appearance->None,
+           BaselinePosition->Baseline,
+           
+           ButtonFunction:>OutputSizeLimit`ButtonFunction[
+            OutputSizeLimit`Defer, 153, 19708477075697934104, 5/2],
+           Enabled->True,
+           Evaluator->Automatic,
+           Method->"Queued"], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowMore"], 
+                StandardForm],
+               ImageSizeCache->{46.2, {1., 7.}}],
+              StripOnInput->False,
+              DynamicUpdating->True,
+              LineSpacing->{1, 2},
+              LineIndent->0,
+              LinebreakAdjustments->{1., 100, 0, 0, 0}], "OSLControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowMore"], 
+                StandardForm]],
+              StripOnInput->False,
+              DynamicUpdating->True,
+              LineSpacing->{1, 2},
+              LineIndent->0,
+              LinebreakAdjustments->{1., 100, 0, 0, 0}], "OSLControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, {25, Full}}],
+           Appearance->None,
+           BaselinePosition->Baseline,
+           
+           ButtonFunction:>OutputSizeLimit`ButtonFunction[
+            OutputSizeLimit`Defer, 153, 19708477075697934104, 5 2],
+           Enabled->True,
+           Evaluator->Automatic,
+           Method->"Queued"], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowAll"], 
+                StandardForm],
+               ImageSizeCache->{34.5, {1., 7.}}],
+              StripOnInput->False,
+              DynamicUpdating->True,
+              LineSpacing->{1, 2},
+              LineIndent->0,
+              LinebreakAdjustments->{1., 100, 0, 0, 0}], "OSLControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeShowAll"], 
+                StandardForm]],
+              StripOnInput->False,
+              DynamicUpdating->True,
+              LineSpacing->{1, 2},
+              LineIndent->0,
+              LinebreakAdjustments->{1., 100, 0, 0, 0}], "OSLControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, {25, Full}}],
+           Appearance->None,
+           BaselinePosition->Baseline,
+           
+           ButtonFunction:>OutputSizeLimit`ButtonFunction[
+            OutputSizeLimit`Defer, 153, 19708477075697934104, Infinity],
+           Enabled->True,
+           Evaluator->Automatic,
+           Method->"Queued"], 
+          ButtonBox[
+           PaneSelectorBox[{False->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeChangeLimit"], 
+                StandardForm],
+               ImageSizeCache->{59.7, {1., 7.}}],
+              StripOnInput->False,
+              DynamicUpdating->True,
+              LineSpacing->{1, 2},
+              LineIndent->0,
+              LinebreakAdjustments->{1., 100, 0, 0, 0}], "OSLControl",
+             StripOnInput->False], True->
+            StyleBox[
+             StyleBox[
+              DynamicBox[ToBoxes[
+                FEPrivate`FrontEndResource["FEStrings", "sizeChangeLimit"], 
+                StandardForm]],
+              StripOnInput->False,
+              DynamicUpdating->True,
+              LineSpacing->{1, 2},
+              LineIndent->0,
+              LinebreakAdjustments->{1., 100, 0, 0, 0}], "OSLControlActive",
+             StripOnInput->False]}, Dynamic[
+             CurrentValue["MouseOver"]],
+            Alignment->Center,
+            FrameMargins->0,
+            ImageSize->{Automatic, {25, Full}}],
+           Appearance->None,
+           BaselinePosition->Baseline,
+           ButtonFunction:>FrontEndExecute[{
+              FrontEnd`SetOptions[
+              FrontEnd`$FrontEnd, 
+               FrontEnd`PreferencesSettings -> {"Page" -> "Advanced"}], 
+              FrontEnd`FrontEndToken["PreferencesDialog"]}],
+           Evaluator->None,
+           Method->"Preemptive"]}
+        },
+        AutoDelete->False,
+        FrameStyle->GrayLevel[0.85],
+        GridBoxDividers->{"Columns" -> {False, {True}}},
+        GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+        GridBoxSpacings->{"Columns" -> {{2}}}]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+     GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{1.}}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.5599999999999999]}, 
+         Offset[0.27999999999999997`]}, "Rows" -> {
+         Offset[0.2], 
+         Offset[1.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}}],
+    BaseStyle->"OutputSizeLimit",
+    FrameMargins->{{12, 12}, {0, 15}},
+    FrameStyle->GrayLevel[0.85],
+    RoundingRadius->5,
+    StripOnInput->False],
+   Deploy,
+   DefaultBaseStyle->"Deploy"],
+  If[19708477075697934104 === $SessionID, 
+   Out[153], Message[
+     MessageName[Syntax, "noinfoker"]]; Missing["NotAvailable"]; 
+   Null]]], "Output",
+ CellChangeTimes->{{3.471566768668359*^9, 3.4715667796222754`*^9}, 
+   3.4837482150884247`*^9, 3.832214827384186*^9, 3.8335590778728037`*^9, 
+   3.8338979025348167`*^9, 3.833908373925208*^9, 3.8339240083073673`*^9, 
+   3.834521934976385*^9, 3.8345243604060497`*^9},
+ CellLabel->
+  "Out[153]=",ExpressionUUID->"14aebb0d-c740-4b63-8c96-ce646b97cdac"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"MakeCommutatorTable", "[", "\[IndentingNewLine]", 
+  RowBox[{
+  "independentvariables", ",", "dependentvariables", ",", 
+   "infinitesimalgroupsxy"}], "]"}]], "Input",
+ CellLabel->
+  "In[154]:=",ExpressionUUID->"0f4b274b-d89c-4a2f-b661-ae34cd171a61"],
+
+Cell[BoxData["\<\"MakeCommutatorTable has finished executing. You can look at \
+the output in the table commutatortable. To present the output in the most \
+readable form you may want view it as a matrix using \
+MatrixForm[commutatortable]. Occasionally the entries in the commutatortable \
+will have terms that cancel. To get rid of these terms use the function \
+Simplify before viewing the table.\"\>"], "Print",
+ CellChangeTimes->{3.8339240132521653`*^9, 3.834521939555138*^9, 
+  3.8345243604242744`*^9},
+ CellLabel->
+  "During evaluation of \
+In[154]:=",ExpressionUUID->"13b3943d-d4a7-4736-b6a3-f08e7e719086"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"MatrixForm", "[", "commutatortable", "]"}]], "Input",
+ CellLabel->
+  "In[155]:=",ExpressionUUID->"da1a0dab-8ca8-4459-9472-6d6fd840829c"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"{", "}"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.833559085177392*^9, 3.8338979025954742`*^9, 
+  3.8339083739511414`*^9, 3.833924013917879*^9, 3.8345219402159033`*^9, 
+  3.834524360435244*^9},
+ CellLabel->
+  "Out[155]//MatrixForm=",ExpressionUUID->"c0ab10ac-3793-4779-8063-\
+e735d3f357b3"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"MaxMemoryUsed", "[", " ", "]"}]], "Input",
+ CellLabel->
+  "In[156]:=",ExpressionUUID->"b19e7c9c-a392-49fa-b4ff-7f1c5a673a06"],
+
+Cell[BoxData["349983520"], "Output",
+ CellChangeTimes->{3.469473015900687*^9, 3.471566768868834*^9, 
+  3.483748215190268*^9, 3.8322148369016333`*^9, 3.833559085300067*^9, 
+  3.833897902622566*^9, 3.833908373961135*^9, 3.833924013958769*^9, 
+  3.834521940286586*^9, 3.834524360451203*^9},
+ CellLabel->
+  "Out[156]=",ExpressionUUID->"492ec3c4-2ab1-4621-b8d8-35c152592add"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["zdeterminingequations1"], "Input",
+ CellChangeTimes->{{3.8335591418934712`*^9, 3.8335591419153996`*^9}, {
+  3.8345240121466093`*^9, 3.834524012441745*^9}},
+ CellLabel->
+  "In[157]:=",ExpressionUUID->"a5ac3774-f5a8-4334-b524-c5830c644f66"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"-3*Derivative[0, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, \
+z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-4*Derivative[0, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"4*Derivative[0, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-4*Derivative[0, 0, 0, 0, 0, 0, 2][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 0, 2][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 2][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 2][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 2][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 0, 2][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 0, 2][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 0, 2][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 2][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 2][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 2][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 0, 2][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 0, 2][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 0, 2][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 2][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 2][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 2][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 0, 2][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 0, 2][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 3][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 3][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 3][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 3][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 3][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 3][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 3][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 3][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 1][eta1][z1, z2, z3, z4, z5, \
+z6, z7] + Derivative[0, 0, 0, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] - 3*Derivative[0, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[0, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, \
+z5, z6, z7] + 3*Derivative[0, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[0, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-4*Derivative[0, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-7*Derivative[0, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-4*Derivative[0, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"4*Derivative[0, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"7*Derivative[0, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-7*Derivative[0, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-4*Derivative[0, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"4*Derivative[0, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"7*Derivative[0, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-4*Derivative[0, 0, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"4*Derivative[0, 0, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 2][xse3][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 2][xse3][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[0, 0, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-4*Derivative[0, 0, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"4*Derivative[0, 0, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-4*Derivative[0, 0, 0, 0, 0, 1, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 1, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 1, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"4*Derivative[0, 0, 0, 0, 0, 1, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 2][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 2][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 2][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 2][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 3][xse3][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 0, 0, 1, 2][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 2][xse4][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 2][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 2][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 2][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 2][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 2][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 2][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 2][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 3*Derivative[0, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, \
+z6, z7] - 3*Derivative[0, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, \
+z6, z7] + Derivative[0, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[0, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, \
+z6, z7] + 2*Derivative[0, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, \
+z6, z7] - 2*Derivative[0, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[0, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[0, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, \
+z6, z7] + 3*Derivative[0, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + 3*Derivative[0, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 2, 0][xse3][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 2, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 2, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 2, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 2, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 0, 0, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[0, 0, 0, 0, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-4*Derivative[0, 0, 0, 0, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 2, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 2, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 2, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 2, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 2, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 3][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 0, 0, 0, 2, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 3][xse1][z1, z2, z3, z4, z5, \
+z6, z7] - 2*Derivative[0, 0, 0, 0, 0, 2, 1][xse1][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 2, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 2, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 2, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 3][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[0, 0, 0, 0, 0, 2, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 3][xse2][z1, z2, z3, z4, z5, \
+z6, z7] - 2*Derivative[0, 0, 0, 0, 0, 2, 1][xse2][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 2, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 2, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 3][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[0, 0, 0, 0, 0, 2, 1][xse2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 3][xse2][z1, z2, z3, z4, z5, \
+z6, z7] + 2*Derivative[0, 0, 0, 0, 0, 2, 1][xse2][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 2, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 2, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 2, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 2][xse3][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 0, 0, 0, 2, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 1][xse4][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 2, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 2, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 2, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 2, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 2, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 2, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 0, 0, 3, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 2][xse1][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[0, 0, 0, 0, 0, 3, 0][xse1][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 3, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 0, 0, 0, 0, 3, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 2][xse2][z1, z2, z3, z4, \
+z5, z6, z7] - Derivative[0, 0, 0, 0, 0, 3, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 3, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 0, 0, 0, 0, 3, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 2][xse2][z1, z2, z3, z4, z5, \
+z6, z7] + Derivative[0, 0, 0, 0, 0, 3, 0][xse2][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 3, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 3, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 2, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 0, 0, 3, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 0, 0, 3, 0][xse4][z1, z2, z3, z4, z5, \
+z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 3, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 3, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 3, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 1, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 1, 0, 0, 0][xse5][z1, z2, z3, z4, z5, \
+z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 1, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 1, 0, 0, 1][xse5][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 1, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 2][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 1, 0, 0, 2][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 1, 0, 0, 2][xse5][z1, z2, z3, z4, z5, \
+z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 2, 0][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 1, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 1, 0, 1, 0][xse5][z1, z2, z3, z4, z5, \
+z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[0, 0, 0, 1, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[0, 0, 1, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 1, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 1, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, \
+z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 2][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 1, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 1, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, \
+z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 1, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 1, 0, 0, 1, 0][xse5][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 1, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 2, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 1, 0, 0, 2, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 1, 0, 0, 2, 0][xse5][z1, z2, z3, z4, z5, \
+z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 1, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 1, 0, 0, 0, 0, 0][eta1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 1, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, \
+z6, z7] + Derivative[0, 1, 0, 0, 0, 0, 0][eta2][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[0, 1, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 1, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 1, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 1, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 1, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, \
+z6, z7] + 3*Derivative[0, 1, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, \
+z5, z6, z7] - Derivative[0, 1, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 1, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[0, 1, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 1, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 1, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 1, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 1, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, \
+z6, z7] + Derivative[0, 1, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 1, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, \
+z6, z7] + Derivative[0, 1, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[0, 1, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-3*Derivative[0, 1, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 1, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 1, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 1, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 1, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 0, 0, 0, 0, 1][eta1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 1, 0, 0, 1][xse1][z1, z2, z3, z4, z5, \
+z6, z7] - 2*Derivative[0, 0, 1, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] \
++ Derivative[0, 1, 0, 0, 0, 0, 1][eta1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 0, 0, 1, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 3*Derivative[0, 1, 0, 0, 0, 0, 1][eta1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-3*Derivative[0, 1, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 1, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 1, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 0, 0, 0, 0, 2, 0][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+6*Derivative[0, 1, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 0, 1, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 2][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 1, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 1, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 1, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, \
+z6, z7] + 2*Derivative[0, 1, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 3*Derivative[0, 0, 0, 0, 0, 2, 0][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[0, 1, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, \
+z6, z7] - 2*Derivative[0, 1, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, \
+z5, z6, z7] - 2*Derivative[0, 1, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 1, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-6*Derivative[0, 1, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-4*Derivative[0, 1, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 1, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 1, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, \
+z5, z6, z7] + 2*Derivative[0, 1, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[0, 1, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, \
+z6, z7] + 3*Derivative[0, 1, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 4*Derivative[0, 1, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, \
+z5, z6, z7] - 6*Derivative[0, 1, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 3*Derivative[0, 1, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-4*Derivative[0, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, \
+z5, z6, z7] - 2*Derivative[0, 1, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 1, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 1, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 1, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"4*Derivative[0, 1, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[0, 1, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-6*Derivative[0, 1, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 1, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 1, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 1, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 1, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"4*Derivative[0, 1, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 1, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 1, 0, 0, 0, 0, 2][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-3*Derivative[0, 1, 0, 0, 0, 0, 2][xse3][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 0, 2][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 3][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 1, 0, 0, 0, 0, 2][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 1][xse1][z1, z2, z3, z4, \
+z5, z6, z7] + 2*Derivative[0, 1, 0, 0, 0, 0, 2][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 3*Derivative[0, 1, 0, 0, 0, 0, 2][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 2][xse1][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[0, 1, 0, 0, 0, 0, 2][xse4][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 0, 2][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 1, 0, 0, 0, 0, 2][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 0, 2][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 1, 0, 0, 0, 0, 2][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 0, 2][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 1, 0, 0, 0, 0, 2][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 1, 0, 0, 0, 0, 2][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 0, 2][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 1, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 3*Derivative[0, 1, 0, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 1, 0, 0, 1][xse1][z1, z2, z3, z4, \
+z5, z6, z7] - Derivative[0, 0, 1, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 1, 0, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 1, 0, 0, 1][xse1][z1, z2, z3, z4, \
+z5, z6, z7] + 2*Derivative[0, 1, 0, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 1, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 1, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 1, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 0, 2][eta1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 0, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, \
+z6, z7] - 2*Derivative[0, 0, 0, 1, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] \
+- 2*Derivative[0, 1, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[0, 0, 0, 1, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"Derivative[0, 0, 0, 0, 0, 2, 0][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 1, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 1, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 2][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 3*Derivative[0, 0, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+6*Derivative[0, 1, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, \
+z6, z7] - 2*Derivative[0, 1, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-4*Derivative[0, 1, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 1, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 1, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 1, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-4*Derivative[0, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, \
+z5, z6, z7] + 2*Derivative[0, 1, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 3*Derivative[0, 1, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, \
+z5, z6, z7] + 6*Derivative[0, 1, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 4*Derivative[0, 1, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, \
+z6, z7] - 3*Derivative[0, 1, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, \
+z5, z6, z7] - 2*Derivative[0, 1, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, \
+z5, z6, z7] - Derivative[0, 1, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-4*Derivative[0, 1, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 1, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"6*Derivative[0, 1, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 1, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, \
+z5, z6, z7] + 2*Derivative[0, 1, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[0, 1, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, \
+z6, z7] + 2*Derivative[0, 1, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-4*Derivative[0, 1, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 1, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 1, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 1, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 1, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"6*Derivative[0, 1, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 3][eta1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 0, 0, 0, 0, 1, 2][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 2][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 1, 0, 0, 2][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"Derivative[0, 0, 0, 0, 0, 2, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 1, 0, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 0, 0, 0, 0, 2, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 0, 0, 3, 0][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[0, 1, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 0, 0, 0, 0, 3, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-4*Derivative[0, 1, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[0, 1, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 0, 0, 3, 0][xse1][z1, z2, z3, z4, z5, \
+z6, z7] + 2*Derivative[0, 1, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 4*Derivative[0, 1, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 1][xse1][z1, z2, z3, z4, \
+z5, z6, z7] - 4*Derivative[0, 1, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 3][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 1][xse1][z1, z2, z3, z4, \
+z5, z6, z7] - 2*Derivative[0, 1, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 0, 2][xse3][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"4*Derivative[0, 1, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 3][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[0, 1, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-4*Derivative[0, 1, 0, 0, 0, 1, 1][xse5][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 1, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 1, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"4*Derivative[0, 1, 0, 0, 0, 1, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 1, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 1, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 1, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 2, 0][xse3][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 1, 0, 0, 0, 2, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 2, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 1, 0, 0, 0, 2, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 0, 0, 2, 1][xse1][z1, z2, z3, z4, z5, \
+z6, z7] + 3*Derivative[0, 1, 0, 0, 0, 2, 0][xse3][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 0, 0, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, \
+z5, z6, z7] - 2*Derivative[0, 1, 0, 0, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 3, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 1, 0, 0, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 2, 0][xse4][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 1, 0, 0, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 1, 0, 0, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 2, 0][xse5][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 1, 0, 0, 0, 2, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 1, 0, 0, 0, 2, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 1, 0, 0, 0, 2, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 1, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 0, 1, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 1, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 0, 1, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 1, 0, 1, 0, 0, 0][xse5][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 0, 1, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 1, 0, 1, 0, 0, 1][xse5][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 1, 0, 0, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 0, 1, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 1, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 0, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 1, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 1, 1, 0, 0, 0, 0][xse5][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 1, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 1, 1, 0, 0, 1, 0][xse5][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 1, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[1, 0, 0, 0, 0, 0, 0][eta1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 1, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[1, 0, 0, 0, 0, 0, 0][eta2][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[0, 0, 0, 1, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[0, 1, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[1, 0, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 0, 0, 1, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[0, 1, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[1, 0, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 1, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] + \
+3*Derivative[0, 1, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[1, 0, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 0, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[0, 0, 0, 1, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] + \
+3*Derivative[0, 1, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[1, 0, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[0, 0, 0, 1, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+3*Derivative[0, 1, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[1, 0, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 0, 0, 1, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+3*Derivative[0, 1, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[1, 0, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 1, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[0, 1, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[1, 0, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 0, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[0, 0, 0, 1, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[0, 1, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[1, 0, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[1, 0, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[0, 0, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[0, 0, 0, 1, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[0, 0, 1, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 0, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, \
+z6, z7] - 2*Derivative[1, 0, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[1, 0, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, \
+z6, z7] - 3*Derivative[1, 0, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[1, 0, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[1, 0, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[1, 0, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[1, 0, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[1, 0, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, \
+z5, z6, z7] + 2*Derivative[1, 0, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - 3*Derivative[1, 0, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, \
+z5, z6, z7] - 3*Derivative[1, 0, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - 3*Derivative[1, 0, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, \
+z6, z7] - 3*Derivative[1, 0, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[1, 0, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-3*Derivative[1, 0, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[1, 0, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[1, 0, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[1, 0, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[1, 0, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + 3*Derivative[1, 0, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, \
+z6, z7] + 3*Derivative[1, 0, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"3*Derivative[0, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + 3*Derivative[1, 0, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-3*Derivative[1, 0, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[1, 0, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[1, 0, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[1, 0, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[1, 0, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 1, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - 3*Derivative[1, 0, 0, 0, 0, 0, 1][eta1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 1, 0, 0, 1][xse2][z1, z2, z3, z4, z5, \
+z6, z7] - 2*Derivative[0, 0, 1, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] \
+- Derivative[1, 0, 0, 0, 0, 0, 1][eta1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-2*Derivative[0, 0, 1, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, \
+z6, z7] + 2*Derivative[1, 0, 0, 0, 0, 0, 1][eta1][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 0, 2][eta2][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 1, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+7*Derivative[1, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, \
+z6, z7] + 3*Derivative[0, 0, 0, 0, 0, 2, 0][eta2][z1, z2, z3, z4, z5, z6, z7] \
+- 2*Derivative[1, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, \
+z6, z7] - 2*Derivative[0, 0, 0, 1, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] \
+- 2*Derivative[1, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 2][eta2][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[0, 0, 1, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 1, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 1, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 0, 2][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - 4*Derivative[0, 1, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 0, 0, 0, 2, 0][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 2][eta2][z1, z2, z3, z4, z5, \
+z6, z7] + 7*Derivative[0, 1, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] \
+- Derivative[1, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 3*Derivative[0, 1, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[1, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[0, 0, 0, 0, 0, 2, 0][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[0, 1, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[0, 1, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+3*Derivative[1, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 2][eta2][z1, z2, z3, z4, z5, \
+z6, z7] + 2*Derivative[0, 1, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] \
++ 4*Derivative[1, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, \
+z5, z6, z7] - Derivative[0, 0, 0, 0, 0, 2, 0][eta2][z1, z2, z3, z4, z5, z6, \
+z7] + 6*Derivative[1, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, \
+z5, z6, z7] - 3*Derivative[1, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-6*Derivative[0, 1, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, \
+z5, z6, z7] - 2*Derivative[1, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-3*Derivative[1, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[1, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[1, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[1, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 1, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[1, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, \
+z6, z7] + 6*Derivative[1, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - 4*Derivative[1, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, \
+z6, z7] - 3*Derivative[1, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, \
+z5, z6, z7] - 2*Derivative[1, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[1, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-4*Derivative[1, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[1, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"6*Derivative[1, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[1, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, \
+z5, z6, z7] + 2*Derivative[1, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[1, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, \
+z5, z6, z7] + 2*Derivative[1, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-4*Derivative[1, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[1, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[1, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[1, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[1, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-4*Derivative[0, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, \
+z5, z6, z7] + 2*Derivative[1, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + 3*Derivative[1, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, \
+z5, z6, z7] + 6*Derivative[1, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-4*Derivative[1, 0, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[1, 0, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[1, 0, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[1, 0, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[1, 0, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[1, 0, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"6*Derivative[1, 0, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 1, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[1, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 2][eta1][z1, z2, z3, z4, z5, \
+z6, z7] + 2*Derivative[0, 0, 0, 0, 0, 2, 1][eta2][z1, z2, z3, z4, z5, z6, z7] \
+- 3*Derivative[0, 1, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[1, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 1, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[1, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[1, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, \
+z6, z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 1, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 3*Derivative[1, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 1][xse2][z1, z2, z3, z4, \
+z5, z6, z7] - 2*Derivative[1, 0, 0, 0, 0, 0, 2][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 3][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[1, 0, 0, 0, 0, 0, 2][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 0, 2][xse3][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[1, 0, 0, 0, 0, 0, 2][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[1, 0, 0, 0, 0, 0, 2][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 0, 2][xse4][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[1, 0, 0, 0, 0, 0, 2][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[1, 0, 0, 0, 0, 0, 2][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 2][xse2][z1, z2, z3, z4, z5, \
+z6, z7] + 3*Derivative[1, 0, 0, 0, 0, 0, 2][xse4][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 0, 2][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[1, 0, 0, 0, 0, 0, 2][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[1, 0, 0, 0, 0, 0, 2][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[1, 0, 0, 0, 0, 0, 2][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 1, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 0, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 1, 0, 0, 1][xse2][z1, z2, z3, z4, \
+z5, z6, z7] - Derivative[0, 0, 1, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[1, 0, 0, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 1, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, \
+z6, z7] + 3*Derivative[1, 0, 0, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 2][eta1][z1, z2, z3, z4, z5, z6, \
+z7] + 3*Derivative[0, 0, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+6*Derivative[1, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 2, 0][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+4*Derivative[1, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 1, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+3*Derivative[1, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 0, 1, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 1, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"Derivative[0, 0, 0, 0, 0, 2, 0][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 1, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 1, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 2][eta1][z1, z2, z3, z4, z5, \
+z6, z7] + 2*Derivative[0, 0, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, z7] \
+- 2*Derivative[0, 1, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, \
+z6, z7] + 3*Derivative[0, 1, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] \
+- Derivative[1, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 2, 0][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 7*Derivative[0, 1, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[1, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[1, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 0, 2][eta1][z1, z2, z3, z4, \
+z5, z6, z7] - Derivative[0, 0, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[1, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 0, 2][eta1][z1, z2, z3, z4, z5, \
+z6, z7] - 2*Derivative[0, 0, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, z7] \
++ 2*Derivative[0, 1, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 0][eta1][z1, z2, z3, z4, z5, \
+z6, z7] + 4*Derivative[0, 1, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] \
++ 2*Derivative[1, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 0][eta1][z1, z2, z3, z4, \
+z5, z6, z7] - Derivative[0, 1, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + 7*Derivative[1, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, \
+z5, z6, z7] - 6*Derivative[1, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 1, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, \
+z5, z6, z7] - 2*Derivative[1, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[1, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[1, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[1, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[1, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[1, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"6*Derivative[0, 1, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, \
+z6, z7] + 2*Derivative[1, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 3*Derivative[1, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, \
+z5, z6, z7] - 6*Derivative[1, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - 3*Derivative[1, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-4*Derivative[0, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, \
+z5, z6, z7] - 2*Derivative[1, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[1, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[1, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[1, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[1, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"4*Derivative[1, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[1, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, \
+z5, z6, z7] - 2*Derivative[1, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, \
+z6, z7] - 2*Derivative[1, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, \
+z5, z6, z7] - Derivative[1, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-6*Derivative[1, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-4*Derivative[1, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[1, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[1, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[1, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, \
+z5, z6, z7] + 2*Derivative[1, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[1, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, \
+z6, z7] + 3*Derivative[1, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + 4*Derivative[1, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-6*Derivative[1, 0, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[1, 0, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[1, 0, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[1, 0, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[1, 0, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[1, 0, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"4*Derivative[1, 0, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 3][eta1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 0, 0, 0, 0, 1, 2][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[0, 1, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+4*Derivative[1, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"Derivative[0, 0, 0, 0, 0, 2, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 0, 0, 0, 0, 3, 0][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"Derivative[0, 0, 0, 0, 0, 1, 2][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 1, 0, 0, 2][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"Derivative[0, 0, 0, 0, 0, 2, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 1, 0, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 3][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 0, 0, 1, 2][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+4*Derivative[0, 1, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 3][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 0, 0, 1, 2][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"Derivative[0, 0, 0, 0, 0, 2, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 0, 0, 0, 0, 3, 0][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+4*Derivative[0, 1, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 0, 0, 0, 0, 2, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 0, 0, 3, 0][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+4*Derivative[1, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, \
+z6, z7] - 4*Derivative[1, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-4*Derivative[0, 1, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, \
+z5, z6, z7] - 2*Derivative[1, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[1, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"4*Derivative[0, 1, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[1, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, \
+z6, z7] + 4*Derivative[1, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - 4*Derivative[1, 0, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 2][xse2][z1, z2, z3, z4, \
+z5, z6, z7] - 2*Derivative[1, 0, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 3, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[1, 0, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"4*Derivative[1, 0, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 3, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[1, 0, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 3][xse2][z1, z2, z3, z4, z5, \
+z6, z7] - 2*Derivative[1, 0, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 0, 2][xse3][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-4*Derivative[1, 0, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 0, 3][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[1, 0, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 1][xse2][z1, z2, z3, z4, \
+z5, z6, z7] + 2*Derivative[1, 0, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 2, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + 4*Derivative[1, 0, 0, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-4*Derivative[1, 0, 0, 0, 0, 1, 1][xse5][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 1, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[1, 0, 0, 0, 0, 1, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"4*Derivative[1, 0, 0, 0, 0, 1, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 2][eta1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[0, 0, 0, 0, 0, 2, 1][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[0, 1, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, z7] - \
+3*Derivative[1, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 2][eta1][z1, z2, z3, z4, z5, \
+z6, z7] - 2*Derivative[0, 0, 0, 0, 0, 2, 1][eta2][z1, z2, z3, z4, z5, z6, z7] \
++ 2*Derivative[0, 1, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+3*Derivative[0, 1, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[1, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 1, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[1, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 2][eta1][z1, z2, z3, z4, \
+z5, z6, z7] - 2*Derivative[0, 0, 0, 0, 0, 2, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 1, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+3*Derivative[1, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-3*Derivative[0, 1, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, \
+z6, z7] - 3*Derivative[1, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"Derivative[1, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[1, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"Derivative[1, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, \
+z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 1, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[1, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, \
+z6, z7] - 2*Derivative[0, 1, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, z7] \
+- 2*Derivative[1, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 0, 0, 0, 0, 2, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - 3*Derivative[1, 0, 0, 0, 0, 2, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 0, 0, 0, 2, 1][xse2][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[1, 0, 0, 0, 0, 2, 0][xse3][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 2, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[1, 0, 0, 0, 0, 2, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[1, 0, 0, 0, 0, 2, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 0, 0, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 2][xse2][z1, z2, z3, z4, \
+z5, z6, z7] - Derivative[1, 0, 0, 0, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[1, 0, 0, 0, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 0, 0, 3, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[1, 0, 0, 0, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 0, 0, 1, 2][xse2][z1, z2, z3, z4, \
+z5, z6, z7] + 2*Derivative[1, 0, 0, 0, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[1, 0, 0, 0, 0, 2, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[1, 0, 0, 0, 0, 2, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[1, 0, 0, 0, 0, 2, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[1, 0, 0, 0, 0, 2, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[1, 0, 0, 0, 0, 2, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 1, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 0, 1, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 1, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-2*Derivative[0, 1, 0, 1, 0, 0, 0][xse1][z1, z2, z3, z4, z5, \
+z6, z7] - 2*Derivative[1, 0, 0, 1, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"2*Derivative[1, 0, 0, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 0, 1, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[1, 0, 0, 1, 0, 0, 0][xse5][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[1, 0, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 0, 1, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[1, 0, 0, 1, 0, 0, 1][xse5][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 1, 0, 0, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 0, 1, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 1, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-2*Derivative[0, 1, 1, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, \
+z6, z7] - 2*Derivative[1, 0, 1, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"2*Derivative[1, 0, 0, 0, 0, 0, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 1, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[1, 0, 1, 0, 0, 0, 0][xse5][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[1, 0, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 1, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[1, 0, 1, 0, 0, 1, 0][xse5][z1, z2, z3, z4, \
+z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 0, 0, 1, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 1, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-3*Derivative[0, 0, 1, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[0, 1, 0, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-3*Derivative[0, 0, 1, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, \
+z6, z7] + Derivative[1, 0, 0, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-3*Derivative[0, 0, 0, 1, 0, 1, 0][xse2][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[1, 0, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 2, 0][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 0, 1, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 0, 2][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 1, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+4*Derivative[0, 1, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 2, 0][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 0, 1, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 0, 2][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 1, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+4*Derivative[1, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 0, 2][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 1, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 2, 0][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 0, 1, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+4*Derivative[1, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 0, 2][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 1, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 2, 0][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 0, 1, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+4*Derivative[0, 1, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-2*Derivative[0, 0, 0, 1, 0, 1, 0][xse5][z1, z2, z3, z4, z5, \
+z6, z7] - 2*Derivative[1, 1, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 1, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 1, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 1, 0, 1, 0][xse5][z1, z2, z3, z4, \
+z5, z6, z7] + 2*Derivative[1, 1, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 1, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[1, 1, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 1, 0, 1, 1][xse1][z1, z2, z3, z4, \
+z5, z6, z7] - Derivative[0, 0, 1, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[0, 1, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[0, 1, 0, 0, 0, 2, 0][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 0, 1, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 1, 0, 0, 0, 0, 2][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 0, 1, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[1, 0, 0, 0, 0, 0, 2][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-2*Derivative[0, 0, 0, 1, 0, 1, 1][xse2][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[0, 0, 1, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[1, 0, 0, 0, 0, 2, 0][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 3][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 1, 0, 0, 0, 2][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 2, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 0, 1, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 2, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 0, 1, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 3][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 1, 0, 0, 0, 2][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 3][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 1, 0, 0, 0, 2][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 2, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 0, 1, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"Derivative[0, 0, 0, 0, 0, 0, 3][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 1, 0, 0, 0, 2][xse4][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 2, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 0, 1, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-2*Derivative[0, 0, 0, 1, 0, 1, 1][xse5][z1, z2, z3, z4, z5, \
+z6, z7] - 2*Derivative[1, 1, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 1, 0, 0, 0, 2][xse5][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 1, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 0, 1, 0, 1, 1][xse5][z1, z2, z3, z4, \
+z5, z6, z7] + 2*Derivative[1, 1, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 1, 0, 0, 0, 2][xse5][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[1, 1, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"2*Derivative[0, 0, 0, 1, 0, 1, 1][eta1][z1, z2, z3, z4, z5, \
+z6, z7] + 2*Derivative[0, 0, 1, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, z7] \
+- 2*Derivative[1, 0, 0, 1, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 1, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 0, 1][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 1, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[0, 0, 1, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 1, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 1, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 0, 1][eta1][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 0, 0, 1, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 1, 0, 0, 0, 2, 0][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 0, 0, 1, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 1, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[0, 1, 0, 0, 0, 0, 2][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 0, 0, 1, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 1, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[1, 0, 0, 0, 0, 0, 2][eta1][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 0, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 0, 0, 1, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[1, 0, 0, 0, 0, 2, 0][eta1][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"Derivative[0, 0, 0, 0, 0, 3, 0][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 1, 0, 2, 0][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 2][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 1, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"Derivative[0, 0, 0, 0, 0, 3, 0][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 1, 0, 2, 0][xse3][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 2][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 1, 0, 0, 1, 1][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 2][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 1, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"Derivative[0, 0, 0, 0, 0, 3, 0][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 1, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"Derivative[0, 0, 0, 0, 0, 3, 0][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 0, 0, 1, 0, 2, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 0, 0, 0, 0, 1, 2][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 0, 1, 0, 0, 1, 1][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 0, 0, 1, 0, 2, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 1, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 1, 0, 0, 1, 1][xse5][z1, z2, z3, z4, \
+z5, z6, z7] - 2*Derivative[1, 1, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 1, 0, 2, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[1, 1, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 0, 1, 0, 0, 1, 1][xse5][z1, z2, z3, z4, \
+z5, z6, z7] + 2*Derivative[1, 1, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 1, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 2, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] + \
+3*Derivative[1, 0, 0, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+3*Derivative[2, 0, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 2, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[1, 0, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 1, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 2, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[1, 0, 0, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 1, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 1, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - 3*Derivative[0, 2, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 0, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 1, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + 3*Derivative[0, 2, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[2, 0, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 1, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 2, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] - \
+3*Derivative[1, 0, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, z7] + \
+3*Derivative[2, 0, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-2*Derivative[0, 0, 1, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, \
+z6, z7] + 2*Derivative[0, 1, 0, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, z7] \
+- Derivative[0, 2, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] - \
+3*Derivative[2, 0, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 0, 0, 1, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 3*Derivative[0, 1, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+3*Derivative[0, 2, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 0, 1, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[0, 2, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 1, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[0, 2, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 1, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 3*Derivative[0, 1, 0, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+3*Derivative[0, 2, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[2, 0, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 1, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[0, 2, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] + \
+3*Derivative[2, 0, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[0, 2, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+3*Derivative[2, 0, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-3*Derivative[0, 2, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[2, 0, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-Derivative[0, 2, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[2, 0, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, \
+z5, z6, z7] + 3*Derivative[0, 2, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[2, 0, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 2, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] + 3*Derivative[2, 0, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 2, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, \
+z6, z7] - 3*Derivative[2, 0, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-Derivative[0, 2, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[2, 0, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, \
+z5, z6, z7] - 3*Derivative[0, 2, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 2, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[2, 0, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, \
+z5, z6, z7] + Derivative[0, 2, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+3*Derivative[2, 0, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 2, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] - 3*Derivative[2, 0, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-3*Derivative[0, 2, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, \
+z5, z6, z7] - Derivative[2, 0, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 2, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[2, 0, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"3*Derivative[0, 2, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, \
+z6, z7] + Derivative[2, 0, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"Derivative[0, 2, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] + 3*Derivative[2, 0, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 0, 1, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, \
+z6, z7] + 2*Derivative[0, 2, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] \
++ Derivative[1, 0, 0, 0, 0, 0, 2][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[2, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 0, 1, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - 3*Derivative[0, 2, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 0, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, z7] + \
+3*Derivative[1, 0, 0, 0, 0, 2, 0][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 2, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[1, 0, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 1, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 1, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 2, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] - \
+4*Derivative[1, 0, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 2, 0][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+3*Derivative[2, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 0, 1, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 1, 0, 0, 0, 0, 2][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[0, 2, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[2, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 1, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[0, 2, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 0, 1, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 4*Derivative[0, 1, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[0, 1, 0, 0, 0, 2, 0][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+3*Derivative[0, 2, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 1, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 0, 0, 0, 1, 1][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+3*Derivative[0, 1, 0, 0, 0, 2, 0][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[0, 2, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+3*Derivative[2, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, \
+z6, z7] + 2*Derivative[0, 2, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] \
+- 2*Derivative[1, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[2, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 2, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[2, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-3*Derivative[0, 2, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, \
+z5, z6, z7] - 2*Derivative[1, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[2, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, \
+z5, z6, z7] + Derivative[0, 2, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, \
+z7] + 3*Derivative[2, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"2*Derivative[0, 2, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, \
+z6, z7] - 2*Derivative[2, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 3*Derivative[0, 2, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 2, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[2, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"Derivative[0, 2, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, \
+z6, z7] - 2*Derivative[1, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, z7] \
++ 3*Derivative[2, 0, 0, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"2*Derivative[0, 2, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, \
+z6, z7] - 2*Derivative[2, 0, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"-3*Derivative[0, 2, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[2, 0, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 2, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[2, 0, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"Derivative[0, 2, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] + 3*Derivative[2, 0, 0, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 1, 1, 0, 0, 1, 0][xse1][z1, z2, z3, z4, \
+z5, z6, z7] - Derivative[0, 2, 0, 0, 0, 0, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 3*Derivative[0, 2, 0, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 1, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+3*Derivative[2, 0, 0, 0, 0, 0, 1][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 1, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 3*Derivative[0, 2, 0, 0, 0, 0, 1][eta1][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[0, 2, 0, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 1, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[2, 0, 0, 0, 0, 0, 1][eta1][z1, z2, z3, z4, z5, z6, z7] + \
+3*Derivative[2, 0, 0, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-2*Derivative[0, 0, 1, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[0, 2, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 0, 0, 0, 0, 0, 2][eta1][z1, z2, z3, z4, z5, z6, z7] + \
+4*Derivative[1, 0, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+3*Derivative[2, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 2, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[1, 0, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 1, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 1, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, \
+z7] + 3*Derivative[0, 2, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] - \
+3*Derivative[1, 0, 0, 0, 0, 0, 2][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[2, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 1, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 2, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[1, 0, 0, 0, 0, 2, 0][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[2, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 0, 0, 1, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 3*Derivative[0, 1, 0, 0, 0, 0, 2][eta1][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[0, 1, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[0, 2, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+3*Derivative[2, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 0, 1, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[0, 2, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 0, 1, 0, 0, 1, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 0, 0, 0, 0, 2][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+4*Derivative[0, 1, 0, 0, 0, 1, 1][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+3*Derivative[0, 2, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[2, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 0, 0, 1, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 1, 0, 0, 0, 2, 0][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 2, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[2, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 2, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 0, 0, 0, 1, 1][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+3*Derivative[2, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 2, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[2, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 1, 1][xse1][z1, z2, z3, z4, \
+z5, z6, z7] + 3*Derivative[0, 2, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[2, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 2, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, \
+z5, z6, z7] + 2*Derivative[2, 0, 0, 0, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 0, 2][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 2, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+3*Derivative[2, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 2, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[2, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 2, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[0, 2, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"3*Derivative[0, 2, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 0, 0, 0, 0, 2][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[2, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 0, 0, 2, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 2, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 0, 0, 2, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[2, 0, 0, 0, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>",
+    ",", "\<\"-Derivative[0, 2, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] - 3*Derivative[2, 0, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 2, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, \
+z6, z7] - Derivative[2, 0, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, z7] \
+== 0\"\>", 
+   ",", "\<\"3*Derivative[0, 2, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[2, 0, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-2*Derivative[0, 2, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, \
+z5, z6, z7] + 2*Derivative[2, 0, 0, 0, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 2, 0, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 2, 0, 1, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[2, 0, 0, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 1, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 2, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 2, 0, 1, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[2, 0, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 1, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 2, 0, 1, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[2, 0, 0, 1, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"Derivative[0, 2, 0, 1, 0, 0, 0][eta1][z1, z2, z3, z4, z5, \
+z6, z7] + Derivative[0, 2, 1, 0, 0, 0, 0][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[2, 0, 0, 1, 0, 0, 0][eta1][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[2, 0, 1, 0, 0, 0, 0][eta2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 2, 0, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 2, 1, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[2, 0, 0, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 1, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 2, 0, 0, 0, 0, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 2, 1, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[2, 0, 0, 0, 0, 0, 1][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 1, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 2, 1, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[2, 0, 1, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, z7] == \
+0\"\>", ",", "\<\"-Derivative[0, 2, 0, 1, 0, 0, 0][xse1][z1, z2, z3, z4, z5, \
+z6, z7] + Derivative[0, 3, 0, 0, 0, 0, 0][eta1][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 0, 0, 1, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 0, 1, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 1, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[2, 1, 0, 0, 0, 0, 0][eta1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 2, 1, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 3, 0, 0, 0, 0, 0][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 0, 0, 1, 0, 0, 1][eta1][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 0, 1, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 1, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 1, 0, 0, 0, 0, 0][eta2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 1, 0, 2, 0][eta1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 0, 1, 0, 0, 2, 0][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[0, 3, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 1, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 1, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 1, 0, 0, 2][eta1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 0, 1, 0, 0, 0, 2][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[0, 3, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 1, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[2, 1, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 3, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[1, 0, 0, 0, 0, 2, 0][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 1, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 1, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 2, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 3, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 0, 0, 0, 0, 0, 2][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 1, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[2, 1, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 2, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[0, 3, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 0, 0, 0, 0, 2, 0][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 1, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 0, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 1, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 3, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[1, 0, 0, 0, 0, 0, 2][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 1, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[2, 1, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-Derivative[0, 3, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 0, 1, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 1, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 3, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[1, 0, 1, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[2, 1, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 1, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[0, 1, 1, 0, 0, 1, 0][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[0, 2, 0, 1, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[1, 2, 0, 0, 0, 0, 0][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 1, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[3, 0, 0, 0, 0, 0, 0][eta1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 1, 0, 0, 1][eta1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[0, 1, 1, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[0, 2, 1, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[1, 2, 0, 0, 0, 0, 0][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 1, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[3, 0, 0, 0, 0, 0, 0][eta2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 1, 0, 0, 0, 1][xse1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 2, 0, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[0, 3, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 1, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[1, 2, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[2, 0, 0, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[2, 1, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[3, 0, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 1, 0, 1, 0][xse1][z1, z2, z3, z4, z5, z6, \
+z7] + 2*Derivative[0, 2, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[0, 3, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 0, 0, 1, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[1, 2, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[2, 0, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 1, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[3, 0, 0, 0, 0, 0, 0][xse1][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 1, 0, 0, 2][eta1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 0, 1, 0, 0, 0, 2][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 1, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+2*Derivative[1, 1, 0, 0, 0, 0, 1][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[1, 2, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[3, 0, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"Derivative[0, 0, 0, 1, 0, 2, 0][eta1][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[0, 0, 1, 0, 0, 2, 0][eta2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[0, 1, 0, 1, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+2*Derivative[1, 1, 0, 0, 0, 1, 0][eta1][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[1, 2, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[3, 0, 0, 0, 0, 0, 0][xse2][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 0, 2][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 1, 0, 0, 0, 1][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[0, 2, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[1, 2, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 0, 0, 0, 1][xse2][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[3, 0, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 2, 0][eta2][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 0, 1, 0, 1, 0][xse3][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[1, 2, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[3, 0, 0, 0, 0, 0, 0][xse3][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 0, 2][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 1, 0, 0, 0, 1][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[1, 2, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[3, 0, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"2*Derivative[0, 1, 0, 0, 0, 2, 0][eta1][z1, z2, z3, z4, z5, z6, \
+z7] - 2*Derivative[0, 1, 0, 1, 0, 1, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[0, 2, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[1, 2, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[2, 0, 0, 0, 0, 1, 0][xse2][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[3, 0, 0, 0, 0, 0, 0][xse4][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 1, 0, 0, 0, 1][xse5][z1, z2, z3, z4, z5, z6, \
+z7] - Derivative[1, 2, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, z7] - \
+Derivative[3, 0, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, z7] == 0\"\>", 
+   ",", "\<\"-2*Derivative[0, 1, 0, 1, 0, 1, 0][xse5][z1, z2, z3, z4, z5, z6, \
+z7] + Derivative[1, 2, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, z7] + \
+Derivative[3, 0, 0, 0, 0, 0, 0][xse5][z1, z2, z3, z4, z5, z6, z7] == 0\"\>"}],
+   "}"}]], "Output",
+ CellChangeTimes->{3.8335591477244263`*^9, 3.833897902711916*^9, 
+  3.8339083747859087`*^9, 3.8339240140230503`*^9, 3.8345219404134073`*^9, 
+  3.8345243605619063`*^9},
+ CellLabel->
+  "Out[157]=",ExpressionUUID->"91b1389a-9bb3-4975-8a7a-06af50304122"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Export", "[", 
+  RowBox[{
+  "\"\<C:\\\\Users\\\\danit\\\\Documents\\\\Research\\\\Lie_Anaysis_RMHD-CHM_\
+Eqn\\\\RMHD-CHM-Lie-Analysis\\\\det_eqn\\\\RMHD_Eqn_1.csv\>\"", ",", 
+   "zdeterminingequations1"}], "]"}]], "Input",
+ CellChangeTimes->{{3.8335591808639145`*^9, 3.833559241274438*^9}, {
+  3.8335592737712708`*^9, 3.8335592763657093`*^9}, {3.833559321243945*^9, 
+  3.8335593370555735`*^9}, {3.83356492070144*^9, 3.833564920993513*^9}, {
+  3.8335649570299916`*^9, 3.833564957104679*^9}, {3.834524039075321*^9, 
+  3.834524047326245*^9}},
+ CellLabel->
+  "In[158]:=",ExpressionUUID->"6b4b4a9a-3753-45ed-913c-c15b61b79b17"],
+
+Cell[BoxData["\<\"C:\\\\Users\\\\danit\\\\Documents\\\\Research\\\\Lie_\
+Anaysis_RMHD-CHM_Eqn\\\\RMHD-CHM-Lie-Analysis\\\\det_eqn\\\\RMHD_Eqn_1.csv\"\>\
+"], "Output",
+ CellChangeTimes->{3.8345243607921667`*^9},
+ CellLabel->
+  "Out[158]=",ExpressionUUID->"cba99614-1f89-450c-a225-b35dc3dfc9be"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\"\<C:\\\\Users\\\\danit\\\\Documents\\\\Research\\\\Lie_\
+Anaysis_RMHD-CHM_Eqn\\\\RMHD-CHM-Lie-Analysis\\\\Matematica\\\\RMHD_Eqn_1.csv\
+\>\""], "Input",
+ CellChangeTimes->{{3.8345240254930677`*^9, 3.834524025979471*^9}},
+ CellLabel->
+  "In[159]:=",ExpressionUUID->"4130daf2-54b2-4653-90aa-e5fcb56d66a0"],
+
+Cell[BoxData["\<\"C:\\\\Users\\\\danit\\\\Documents\\\\Research\\\\Lie_\
+Anaysis_RMHD-CHM_Eqn\\\\RMHD-CHM-Lie-Analysis\\\\Matematica\\\\RMHD_Eqn_1.csv\
+\"\>"], "Output",
+ CellChangeTimes->{3.834524360807622*^9},
+ CellLabel->
+  "Out[159]=",ExpressionUUID->"666c57e9-0009-4be4-a8c0-9132dcb1d301"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\"\<C:\\\\Users\\\\danit\\\\Documents\\\\Research\\\\Lie_\
+Anaysis_RMHD-CHM_Eqn\\\\RMHD-CHM-Lie-Analysis\\\\det_eqn\\\\RMHD_Eqn.csv\>\""]\
+, "Input",
+ CellChangeTimes->{{3.833898230916539*^9, 3.83389823836462*^9}},
+ CellLabel->
+  "In[160]:=",ExpressionUUID->"7601f8b8-c3ca-4dc9-b688-31f35e159b34"],
+
+Cell[BoxData["\<\"C:\\\\Users\\\\danit\\\\Documents\\\\Research\\\\Lie_\
+Anaysis_RMHD-CHM_Eqn\\\\RMHD-CHM-Lie-Analysis\\\\det_eqn\\\\RMHD_Eqn.csv\"\>"]\
+, "Output",
+ CellChangeTimes->{3.833908375096097*^9, 3.8339240145973425`*^9, 
+  3.834521941087081*^9, 3.834524360820037*^9},
+ CellLabel->
+  "Out[160]=",ExpressionUUID->"958475c5-42df-4599-8d8a-0d137ed3b774"]
+}, Open  ]]
+},
+WindowSize->{1138.5, 581.6999999999999},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+TaggingRules->{
+ "WelcomeScreenSettings" -> {"FEStarting" -> False}, "TryRealOnly" -> False},
+Magnification:>1. Inherited,
+FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"cc69addb-ce40-4103-a26c-939ff3777a6d"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 184, 3, 35, "Text",ExpressionUUID->"672c6dea-9177-4046-9d20-467d779b830d"],
+Cell[745, 25, 243, 6, 28, "Input",ExpressionUUID->"addc9a63-fc2c-4cdc-878d-969f18a4d703"],
+Cell[991, 33, 675, 15, 58, "Text",ExpressionUUID->"c52037ec-0337-4eda-ad87-9dabb09dcd3b"],
+Cell[1669, 50, 176, 3, 29, "Input",ExpressionUUID->"c2dce92a-c382-4f17-a4ab-dcb47d10c22d"],
+Cell[1848, 55, 188, 3, 35, "Text",ExpressionUUID->"15219869-0daa-488d-a20a-c5e17d39efec"],
+Cell[2039, 60, 385, 9, 28, "Input",ExpressionUUID->"bfdad67b-e3d7-41f2-a92e-50c9b1804efa"],
+Cell[2427, 71, 186, 3, 35, "Text",ExpressionUUID->"bba78b02-5a6f-473d-9fa9-52136cf286dc"],
+Cell[2616, 76, 366, 9, 28, "Input",ExpressionUUID->"ee4cea9d-c32f-4e30-ab81-0919c535b0b5"],
+Cell[2985, 87, 290, 5, 35, "Text",ExpressionUUID->"cfdadec1-4a78-4954-85c4-4ed3da7e195c"],
+Cell[3278, 94, 308, 8, 28, "Input",ExpressionUUID->"fcf81d8e-b800-4031-8696-1299a49bb668"],
+Cell[3589, 104, 212, 4, 58, "Text",ExpressionUUID->"a3a75e5e-ad79-4e3f-9d20-6fdfd0df48a7"],
+Cell[3804, 110, 216, 5, 28, "Input",ExpressionUUID->"99f94b48-3e32-40e4-9091-44c3aca05cc7"],
+Cell[4023, 117, 443, 7, 58, "Text",ExpressionUUID->"169ed71f-47cd-4061-9079-3683a40f8f38"],
+Cell[4469, 126, 150, 4, 28, "Input",ExpressionUUID->"23c4d2e6-0773-4954-9e26-cf165455deee"],
+Cell[4622, 132, 569, 8, 81, "Text",ExpressionUUID->"3524de00-2451-4774-9ed2-4a8e9987f852"],
+Cell[5194, 142, 154, 4, 28, "Input",ExpressionUUID->"e2497cc9-aff3-4f18-8d99-268c2fa5276c"],
+Cell[5351, 148, 629, 9, 104, "Text",ExpressionUUID->"40026053-4451-469a-9ace-b8eed30471f2"],
+Cell[5983, 159, 162, 4, 28, "Input",ExpressionUUID->"a9966372-0b91-468c-bb1e-6936e878acb7"],
+Cell[6148, 165, 429, 8, 58, "Text",ExpressionUUID->"8382d2ad-e111-4829-8a28-6f33d5890687"],
+Cell[6580, 175, 1647, 27, 46, "Input",ExpressionUUID->"e9260a34-73c5-488f-901d-f95aa2d9b210"],
+Cell[8230, 204, 404, 8, 35, "Text",ExpressionUUID->"2830fd9c-a569-444d-8b13-088629257bca"],
+Cell[8637, 214, 921, 17, 46, "Input",ExpressionUUID->"7ed0d7f7-e813-4162-870f-4ad9d05766f8"],
+Cell[9561, 233, 277, 6, 29, "Input",ExpressionUUID->"47f46df6-189c-406e-b7e4-965e2d4fdecf"],
+Cell[9841, 241, 307, 5, 28, "Input",ExpressionUUID->"e3ed7a8c-d5c8-4610-b403-7884652ab008"],
+Cell[CellGroupData[{
+Cell[10173, 250, 277, 7, 63, "Input",ExpressionUUID->"d59b39dd-960a-4569-8d5a-c92ed9e17417"],
+Cell[CellGroupData[{
+Cell[10475, 261, 597, 12, 22, "Print",ExpressionUUID->"71b0d947-72e0-4a00-9f68-7de7bb8236de"],
+Cell[11075, 275, 1138, 17, 111, "Print",ExpressionUUID->"c9c30c31-d29d-410e-aa37-397021d94974"],
+Cell[12216, 294, 900, 16, 40, "Print",ExpressionUUID->"eba9ca96-e94f-4ff9-a548-6b8ff55cdba2"],
+Cell[13119, 312, 565, 12, 22, "Print",ExpressionUUID->"a1ad99f8-d8e2-4116-9ddc-a2b1b722eb53"],
+Cell[13687, 326, 1142, 17, 128, "Print",ExpressionUUID->"f6e5867f-917d-4f2d-aa46-a319d7739849"]
+}, Open  ]],
+Cell[14844, 346, 231, 5, 32, "Output",ExpressionUUID->"12d2eff3-db80-4843-bad0-505e0048b230"]
+}, Open  ]],
+Cell[15090, 354, 110, 0, 35, "Text",ExpressionUUID->"5096cc2c-98fd-479f-8ead-95aff7429b45"],
+Cell[15203, 356, 177, 3, 29, "Input",ExpressionUUID->"b12beb2a-36b3-4e82-a623-08238f8b4714"],
+Cell[15383, 361, 120, 3, 35, "Text",ExpressionUUID->"7d484f0b-af12-4121-91c8-e585951ee762"],
+Cell[CellGroupData[{
+Cell[15528, 368, 176, 4, 29, "Input",ExpressionUUID->"700299b2-8677-4111-aed5-c667bee4d7d7"],
+Cell[CellGroupData[{
+Cell[15729, 376, 226, 5, 22, "Print",ExpressionUUID->"09d6effa-29ce-4121-8ba2-30eda942568e"],
+Cell[15958, 383, 222, 5, 22, "Print",ExpressionUUID->"3b3aa681-61c6-46dd-88c5-fff8dcc8ff9b"],
+Cell[16183, 390, 224, 5, 22, "Print",ExpressionUUID->"be03ed13-d25e-4492-9de5-38efd8726a9c"],
+Cell[16410, 397, 226, 5, 22, "Print",ExpressionUUID->"c6e910d2-b2d6-4bf0-a1c4-b47ef91f3a8b"],
+Cell[16639, 404, 224, 5, 22, "Print",ExpressionUUID->"65f80321-746b-45e2-ac0d-0ab12f6f6fab"]
+}, Open  ]],
+Cell[16878, 412, 402, 8, 32, "Output",ExpressionUUID->"870edb5f-df39-4810-a85a-dd4180b1ca7a"]
+}, Open  ]],
+Cell[17295, 423, 120, 3, 35, "Text",ExpressionUUID->"aac6b9df-513f-4ebc-9810-2d9f023f5b78"],
+Cell[17418, 428, 176, 4, 29, "Input",ExpressionUUID->"b432a29e-8d9d-4bb0-b349-8c2b72e9a8d9"],
+Cell[17597, 434, 165, 3, 35, "Text",ExpressionUUID->"57022606-4ac7-443e-8e96-2ea3a031f9d9"],
+Cell[CellGroupData[{
+Cell[17787, 441, 230, 4, 28, "Input",ExpressionUUID->"db2ad57c-999e-499c-b5bb-016536704520"],
+Cell[CellGroupData[{
+Cell[18042, 449, 226, 5, 22, "Print",ExpressionUUID->"f235b187-2b86-4fda-81ac-c38dc1dae60f"],
+Cell[18271, 456, 226, 5, 22, "Print",ExpressionUUID->"c5a28456-17f5-4ba3-9f6f-ecc797c8a28e"],
+Cell[18500, 463, 226, 5, 22, "Print",ExpressionUUID->"b3673a15-2caa-4670-ba10-df0f9592e928"],
+Cell[18729, 470, 222, 5, 22, "Print",ExpressionUUID->"b3b965dd-3f65-4b4f-9cd2-c41adf54216c"],
+Cell[18954, 477, 224, 5, 22, "Print",ExpressionUUID->"f5807a35-7a28-43f0-8f52-f47cba37344e"]
+}, Open  ]],
+Cell[19193, 485, 327, 7, 32, "Output",ExpressionUUID->"64e8dab2-5de5-4367-9a6f-6b64c0a3a03a"]
+}, Open  ]],
+Cell[19535, 495, 120, 3, 35, "Text",ExpressionUUID->"9661a693-5b10-4cea-aa43-c03a34b1ff43"],
+Cell[19658, 500, 228, 5, 29, "Input",ExpressionUUID->"cd375bd4-b79e-4814-a7dd-6ddb399636ab"],
+Cell[19889, 507, 123, 0, 35, "Text",ExpressionUUID->"0c7d63fc-52be-43c7-83e0-ac8aaac2de6f"],
+Cell[CellGroupData[{
+Cell[20037, 511, 280, 5, 28, "Input",ExpressionUUID->"4572b3cb-3747-4762-96a9-9a8100029749"],
+Cell[20320, 518, 371, 6, 32, "Output",ExpressionUUID->"ca73f228-3889-49bb-abff-0ef660f57fa8"]
+}, Open  ]],
+Cell[20706, 527, 545, 11, 150, "Text",ExpressionUUID->"610af152-b564-42a8-9ac5-e0575b9d747a"],
+Cell[21254, 540, 176, 4, 29, "Input",ExpressionUUID->"1a259947-7457-4268-8069-a9cc2e082939"],
+Cell[21433, 546, 163, 3, 35, "Text",ExpressionUUID->"a9a13f66-b7a2-4579-b09c-08f2b0cd5a42"],
+Cell[CellGroupData[{
+Cell[21621, 553, 144, 3, 29, "Input",ExpressionUUID->"ac639ce3-bfe9-4795-9cf3-39efb6fb8efb"],
+Cell[21768, 558, 385, 6, 32, "Output",ExpressionUUID->"0e5aa3dd-6fed-49af-b234-2e9143977a9c"]
+}, Open  ]],
+Cell[22168, 567, 103, 0, 35, "Text",ExpressionUUID->"58820618-ca0a-47b4-ab39-64d4a444a5b0"],
+Cell[CellGroupData[{
+Cell[22296, 571, 144, 3, 29, "Input",ExpressionUUID->"631aa7f3-6d5c-4154-8cb6-b08036e96b5b"],
+Cell[22443, 576, 382, 6, 32, "Output",ExpressionUUID->"edca2a1b-ec7f-4803-b901-9d286f33fe82"]
+}, Open  ]],
+Cell[22840, 585, 420, 11, 28, "Input",ExpressionUUID->"3d110daa-5680-4518-9830-2493611415fa"],
+Cell[23263, 598, 143, 2, 35, "Text",ExpressionUUID->"529eff04-4568-4a0c-ac10-0e58603dc588"],
+Cell[CellGroupData[{
+Cell[23431, 604, 162, 3, 28, "Input",ExpressionUUID->"799c8795-f081-4c7a-a7a7-34c10092750c"],
+Cell[23596, 609, 413, 7, 32, "Output",ExpressionUUID->"21015219-b442-4e54-ac1e-36688791763d"]
+}, Open  ]],
+Cell[24024, 619, 196, 3, 35, "Text",ExpressionUUID->"8c3d31f2-acb8-4ca5-96dc-f97f71ae184f"],
+Cell[CellGroupData[{
+Cell[24245, 626, 392, 7, 28, "Input",ExpressionUUID->"82ff981d-4a1e-4acf-9329-d55ed2c5cfe8"],
+Cell[24640, 635, 12946, 336, 136, "Output",ExpressionUUID->"14aebb0d-c740-4b63-8c96-ce646b97cdac"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[37623, 976, 274, 6, 48, "Input",ExpressionUUID->"0f4b274b-d89c-4a2f-b661-ae34cd171a61"],
+Cell[37900, 984, 614, 10, 58, "Print",ExpressionUUID->"13b3943d-d4a7-4736-b6a3-f08e7e719086"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[38551, 999, 160, 3, 28, "Input",ExpressionUUID->"da1a0dab-8ca8-4459-9472-6d6fd840829c"],
+Cell[38714, 1004, 369, 10, 44, "Output",ExpressionUUID->"c0ab10ac-3793-4779-8063-e735d3f357b3"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[39120, 1019, 149, 3, 28, "Input",ExpressionUUID->"b19e7c9c-a392-49fa-b4ff-7f1c5a673a06"],
+Cell[39272, 1024, 370, 6, 32, "Output",ExpressionUUID->"492ec3c4-2ab1-4621-b8d8-35c152592add"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[39679, 1035, 252, 4, 28, "Input",ExpressionUUID->"a5ac3774-f5a8-4334-b524-c5830c644f66"],
+Cell[39934, 1041, 139729, 2216, 23710, "Output",ExpressionUUID->"91b1389a-9bb3-4975-8a7a-06af50304122"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[179700, 3262, 646, 12, 48, "Input",ExpressionUUID->"6b4b4a9a-3753-45ed-913c-c15b61b79b17"],
+Cell[180349, 3276, 293, 5, 32, "Output",ExpressionUUID->"cba99614-1f89-450c-a225-b35dc3dfc9be"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[180679, 3286, 319, 5, 28, InheritFromParent,ExpressionUUID->"4130daf2-54b2-4653-90aa-e5fcb56d66a0"],
+Cell[181001, 3293, 294, 5, 32, "Output",ExpressionUUID->"666c57e9-0009-4be4-a8c0-9132dcb1d301"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[181332, 3303, 311, 5, 28, "Input",ExpressionUUID->"7601f8b8-c3ca-4dc9-b688-31f35e159b34"],
+Cell[181646, 3310, 360, 6, 81, "Output",ExpressionUUID->"958475c5-42df-4599-8d8a-0d137ed3b774"]
+}, Open  ]]
+}
+]
+*)
+
